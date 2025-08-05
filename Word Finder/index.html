@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Finder</h1>
+        <label for="paragraph">Enter your paragraph:</label>
+        <textarea id="paragraph" rows="6" cols="60"></textarea>
+        <br>
+
+        <label for="word">Enter the word to find:</label>
+        <input type="text" id="word" onkeydown="checkEnter(event)" placeholder="Type a word">
+        <br>
+
+        <button onclick="findWord()"  >Find Word</button>
+        
+        <div class="result">
+            <p>Word Found: <span id="found">0</span> times</p>
+        </div>
+    </div>
+        
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header{
+    border-bottom: 1px solid black ;
+}
+img{
+    width: 90px;
+}
+h1, li , ul {
+    display: inline;
+}
+a {
+    font-size: 20px;
+    text-decoration: none;
+    color: rgb(226, 17, 35);
+}
+ul {
+    margin: 0px 0px 0px 40%;
+    /* align-items: center; */
+}
+a:hover{
+    text-decoration: underline;
+    font-size: 22px;
+    color: rgb(8, 119, 8);
+    vertical-align: super;
+}
+
+li{
+    margin: 0px 10px 0px 0px;
+}
+.card{
+    display: inline-block;
+    align-items: center;
+    border: 1px solid black;
+    width: 300px;
+    overflow: hidden;
+    height: 350px;
+    padding: 20px;
+    margin: 100px 10px;
+    border-radius: 80px 40px;
+    box-shadow: 5px 5px 1px gray;
+}

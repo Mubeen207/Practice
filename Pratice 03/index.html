@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultra Media Hub</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      /* Enable class‑based dark mode */
+      tailwind.config = { darkMode: "class" };
+    </script>
+    <!-- Alpine.js for interactivity -->
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <!-- Swiper for sliders -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS for scroll animation -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <style></style>
+  </head>
+
+  <body
+    x-data="app()"
+    x-init="init()"
+    :class="darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'"
+  >
+    <!-- Header -->
+    <header class="glass sticky top-0 z-50 shadow-md" x-data="{open:false}">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <h1 class="text-2xl font-extrabold tracking-wide">Ultra Media Hub</h1>
+        <nav class="hidden md:flex space-x-8 font-medium">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#gallery" class="nav-link">Gallery</a>
+          <a href="#testimonials" class="nav-link">Testimonials</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <!-- Dark‑mode toggle (desktop) -->
+        <button
+          @click="darkMode = !darkMode"
+          class="hidden md:inline-block mx-2 text-gray-700 dark:text-gray-100 hover:text-blue-600"
+          aria-label="Toggle Dark Mode"
+        >
+          <svg
+            x-show="!darkMode"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3v1m0 16v1m8.66-12.66l-.707.707M4.05 19.95l-.707-.707M21 12h1M2 12H1m2.34-6.66l.707.707M19.95 4.05l.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+          <svg
+            x-show="darkMode"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M17.293 13.293a8 8 0 11-10.586-10.586A8 8 0 0017.293 13.293z"
+            />
+          </svg>
+        </button>
+        <button
+          @click="open=!open"
+          class="md:hidden focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <svg
+            class="w-7 h-7"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              x-show="!open"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+            <path
+              x-show="open"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <a
+          href="#contact"
+          class="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          >Work With Us</a
+        >
+      </div>
+      <!-- Mobile menu -->
+      <div class="md:hidden" x-show="open" x-transition>
+        <nav class="flex flex-col space-y-2 px-6 pb-4 font-medium">
+          <a @click="open=false" href="#home" class="nav-link">Home</a>
+          <a @click="open=false" href="#about" class="nav-link">About</a>
+          <a @click="open=false" href="#gallery" class="nav-link">Gallery</a>
+          <a @click="open=false" href="#testimonials" class="nav-link"
+            >Testimonials</a
+          >
+          <a @click="open=false" href="#contact" class="nav-link">Contact</a>
+          <button
+            @click="darkMode = !darkMode; open = false"
+            class="text-left text-gray-700 dark:text-gray-100 hover:text-blue-600"
+          >
+            Toggle Dark Mode
+          </button>
+          <a
+            href="#contact"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700"
+            >Work With Us</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section
+      id="home"
+      class="relative h-[90vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white px-6 md:px-20 wave"
+    >
+      <div class="max-w-xl space-y-6 pt-12 md:pt-0" data-aos="fade-right">
+        <h2 class="text-5xl font-extrabold leading-tight">
+          Bringing <span class="text-[#00f0ff]">LIVE</span> back to <br />
+          <span class="text-[#ff00c8]">LIVE EVENTS</span>
+        </h2>
+        <p class="text-lg text-gray-200">
+          At Ultra Media Hub, we help you manage, stream, and enjoy beautiful
+          live moments — anytime, anywhere.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="#contact"
+            class="px-6 py-3 bg-[#00f0ff] hover:bg-[#00cfe0] text-black rounded-lg font-semibold shadow-md"
+            >Work With Us</a
+          >
+          <a
+            href="#about"
+            class="px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black font-semibold shadow-md"
+            >Learn More</a
+          >
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-2 mt-12 md:mt-0" data-aos="zoom-in">
+        <template x-for="img in heroImgs" :key="img">
+          <img
+            :src="img"
+            class="rounded-lg shadow-md w-full object-cover h-40"
+            loading="lazy"
+          />
+        </template>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-gray-800">
+      <div class="max-w-6xl mx-auto px-6 text-center" data-aos="fade-up">
+        <h3 class="text-4xl font-bold mb-6">Our Superpowers</h3>
+        <p class="max-w-3xl mx-auto text-gray-600 dark:text-gray-300 mb-12">
+          We blend technology and creativity to deliver immersive event
+          experiences and powerful media tools that put you in control.
+        </p>
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl shadow"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <span class="text-4xl">🚀</span>
+            <h4 class="text-xl font-semibold mt-4">Fast Streaming</h4>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+              Buffer-free playback with adaptive bitrate.
+            </p>
+          </div>
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl shadow"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <span class="text-4xl">🔒</span>
+            <h4 class="text-xl font-semibold mt-4">Secure Access</h4>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+              Role-based permissions and DRM protection.
+            </p>
+          </div>
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl shadow"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <span class="text-4xl">📈</span>
+            <h4 class="text-xl font-semibold mt-4">Real-time Analytics</h4>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+              Engagement dashboards & heatmaps.
+            </p>
+          </div>
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl shadow"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <span class="text-4xl">💾</span>
+            <h4 class="text-xl font-semibold mt-4">Cloud Archive</h4>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+              Unlimited storage for memories that matter.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-100 dark:bg-gray-900">
+      <div class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+        <h3 class="text-4xl font-bold mb-10 text-center">Media Gallery</h3>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" id="galleryGrid">
+          <template x-for="img in galleryImgs" :key="img">
+            <img
+              :src="img"
+              class="rounded-xl shadow-md w-full h-60 object-cover hover:opacity-90 cursor-pointer"
+              @click="openLightbox(img)"
+              loading="lazy"
+            />
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-white dark:bg-gray-800">
+      <div class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+        <h3 class="text-4xl font-bold mb-10 text-center">
+          What Our Clients Say
+        </h3>
+        <!-- Swiper -->
+        <div class="swiper mySwiper rounded-xl shadow-lg">
+          <div class="swiper-wrapper">
+            <template x-for="t in testimonials" :key="t.name">
+              <div
+                class="swiper-slide p-8 bg-gray-50 dark:bg-gray-700 flex flex-col items-center text-center"
+              >
+                <img
+                  :src="t.avatar"
+                  class="w-20 h-20 rounded-full shadow mb-4"
+                  loading="lazy"
+                />
+                <p
+                  class="text-gray-700 dark:text-gray-300 italic max-w-md mb-4"
+                >
+                  “<span x-text="t.quote"></span>”
+                </p>
+                <h4 class="font-semibold" x-text="t.name"></h4>
+                <span
+                  class="text-sm text-gray-500 dark:text-gray-400"
+                  x-text="t.role"
+                ></span>
+              </div>
+            </template>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section
+      id="contact"
+      class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white wave"
+    >
+      <div class="max-w-4xl mx-auto px-6" data-aos="fade-up">
+        <h3 class="text-4xl font-bold mb-6 text-center">Get In Touch</h3>
+        <form class="grid gap-6" @submit.prevent="submitForm">
+          <input
+            type="text"
+            placeholder="Your Name"
+            required
+            class="p-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-300"
+          />
+          <input
+            type="email"
+            placeholder="Email Address"
+            required
+            class="p-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-300"
+          />
+          <textarea
+            rows="5"
+            placeholder="Your Message"
+            required
+            class="p-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-300"
+          ></textarea>
+          <button
+            type="submit"
+            class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 flex items-center justify-center hidden"
+      x-show="lightboxOpen"
+      x-transition
+    >
+      <img
+        :src="lightboxImg"
+        class="max-w-full max-h-full rounded-lg shadow-2xl"
+        @click="lightboxOpen=false"
+      />
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300 py-6">
+      <div
+        class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row md:justify-between items-center text-sm space-y-4 md:space-y-0"
+      >
+        <p>
+          &copy; <span id="year"></span> Ultra Media Hub. All rights reserved.
+        </p>
+        <div class="space-x-4">
+          <a href="#" class="hover:text-white">Privacy</a>
+          <a href="#" class="hover:text-white">Terms</a>
+          <a href="#" class="hover:text-white">FAQ</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button
+      class="fixed bottom-6 right-6 p-3 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700"
+      @click="scrollToTop"
+      x-show="scrollBtn"
+      x-transition
+    >
+      ▲
+    </button>
+
+    <!-- App Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
