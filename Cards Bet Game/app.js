@@ -12,7 +12,7 @@ let amountNum = 0;
 function flipCard(num) {
   inputNum = parseFloat(Input.value);
   amountNum = parseFloat(AmountEl.innerText);
-  if (amountNum >= inputNum) {
+  if (amountNum >= inputNum && inputNum !== String) {
     if (!isFlipped) {
       let kingNumber = Math.ceil(Math.random() * 3);
 
@@ -36,8 +36,11 @@ function flipCard(num) {
         SumTract();
       }
     }
-  } else {
+  } else if (amountNum < inputNum) {
     h1.innerHTML = "Not enough balance to Bet!";
+    h1.style.color = "red";
+  } else {
+    h1.innerHTML = "Please Enter Bet Amount!";
     h1.style.color = "red";
   }
 }
@@ -47,15 +50,21 @@ function resetCard() {
   img2.src = "./Images/card-back.png";
   img3.src = "./Images/card-back.png";
   h1.innerHTML = "Pick a card!";
-  h1.style.color = "black";
+  h1.style.color = "blue";
   isFlipped = false;
 }
 
 function Deposit(Element) {
-  AmountEl.innerHTML = Input.value;
-  Element.innerHTML = "Reset All";
-  Element.setAttribute("OnClick", "Reload()");
-  Input.value = "";
+  if (Input.value > 0 && Input.value !== String) {
+    AmountEl.innerHTML = Input.value;
+
+    Element.innerHTML = "Reset All";
+    Element.setAttribute("OnClick", "Reload(this)");
+    Input.value = "";
+  } else {
+    h1.innerHTML = "Invalid Value Please Enter Number Only!";
+    h1.style.color = "red";
+  }
 }
 function SumTract() {
   inputNum = parseFloat(Input.value);
@@ -78,6 +87,10 @@ function Add() {
   }
 }
 
-function Reload() {
-  location.reload();
+function Reload(Element) {
+  resetCard();
+  Element.innerHTML = "Deposit";
+  Element.setAttribute("OnClick", "Deposit(this)");
+  Input.value = "";
+  AmountEl.innerHTML = "";
 }
