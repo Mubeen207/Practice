@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Find the King and <span class="double">Double</span> Your Bet!</h1>
+    <h1>Your Amount Is: <span id="amount"></span></h1>
+    <input type="text" id="input" />
+    <button class="add_dep_btn" onclick="Deposit(this)">Deposit</button>
+    <br />
+    <div class="card">
+      <button onclick="resetCard()">ResetCard</button>
+      <br />
+      <div class="images">
+        <img
+          id="img-1"
+          onClick="flipCard(1)"
+          src="./Images/card-back.png"
+          alt="card-back"
+        />
+        <img
+          id="img-2"
+          onClick="flipCard(2)"
+          src="./Images/card-back.png"
+          alt="card-back"
+        />
+        <img
+          id="img-3"
+          onClick="flipCard(3)"
+          src="./Images/card-back.png"
+          alt="card-back"
+        />
+      </div>
+    </div>
+    <h1 id="heading"></h1>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+* {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: blanchedalmond;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  color: blue;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.double {
+  color: red;
+}
+#input {
+  height: 40px;
+  width: 250px;
+  border: 0.5px solid red;
+  border-radius: 9999px;
+  margin-bottom: 20px;
+  padding: 0px 20px;
+  font-weight: bold;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 650px;
+}
+
+.images {
+  display: flex;
+  gap: 10px;
+}
+
+img {
+  width: 200px;
+  height: 300px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px #0000004d;
+}
+
+.add_dep_btn {
+  width: 120px;
+  height: 40px;
+  font-weight: bold;
+  color: blue;
+  background-color: white;
+  border-radius: 9999px;
+  border: 2px solid blue;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px #00000033;
+}
+
+.add_dep_btn:hover {
+  color: white;
+  background-color: blue;
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px #0000004d;
+}
+button {
+  width: 120px;
+  height: 40px;
+  font-weight: bold;
+  color: green;
+  background-color: white;
+  border-radius: 9999px;
+  border: 2px solid green;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px #00000033;
+}
+
+button:hover {
+  color: white;
+  background-color: green;
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px #0000004d;
+}
