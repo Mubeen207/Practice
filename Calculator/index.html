@@ -7,27 +7,44 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <input id="display" type="text" readonly />
-    <br />
-    <button onclick="appendNumber('7')">7</button>
-    <button onclick="appendNumber('8')">8</button>
-    <button onclick="appendNumber('9')">9</button>
-    <button onclick="setOperation('/')">/</button>
-    <br />
-    <button onclick="appendNumber('4')">4</button>
-    <button onclick="appendNumber('5')">5</button>
-    <button onclick="appendNumber('6')">6</button>
-    <button onclick="setOperation('*')">*</button>
-    <br />
-    <button onclick="appendNumber('1')">1</button>
-    <button onclick="appendNumber('2')">2</button>
-    <button onclick="appendNumber('3')">3</button>
-    <button onclick="setOperation('-')">-</button>
-    <br />
-    <button onclick="appendNumber('0')">0</button>
-    <button onclick="clearDisplay()">C</button>
-    <button onclick="calculateResult()">=</button>
-    <button onclick="setOperation('+')">+</button>
+    <div>
+      <input id="display" type="text" readonly />
+      <br />
+      <button class="number" onclick="appendNumber('7')">7</button>
+      <button class="number" onclick="appendNumber('8')">8</button>
+      <button class="number" onclick="appendNumber('9')">9</button>
+      <button class="operator" onclick="setOperation('/')">/</button>
+      <br />
+      <button class="number" onclick="appendNumber('4')">4</button>
+      <button class="number" onclick="appendNumber('5')">5</button>
+      <button class="number" onclick="appendNumber('6')">6</button>
+      <button class="operator" onclick="setOperation('*')">*</button>
+      <br />
+      <button class="number" onclick="appendNumber('1')">1</button>
+      <button class="number" onclick="appendNumber('2')">2</button>
+      <button class="number" onclick="appendNumber('3')">3</button>
+      <button class="operator" onclick="setOperation('-')">-</button>
+      <br />
+      <button class="number" onclick="appendNumber('0')">0</button>
+      <button class="operator" onclick="clearDisplay()">C</button>
+      <button class="operator" onclick="calculateResult()">=</button>
+      <button class="operator" onclick="setOperation('+')">+</button>
+      <br />
+      <button onclick="squareRoot()">√</button>
+      <button onclick="square()">x²</button>
+      <button onclick="inverse()">1/x</button>
+      <button onclick="setOperation('%')">%</button>
+      <br />
+      <button onclick="memoryAdd()">M+</button>
+      <button onclick="memorySubtract()">M-</button>
+      <button onclick="memoryRecall()">MR</button>
+      <button onclick="memoryClear()">MC</button>
+      <br />
+      <div
+        id="history"
+        style="margin-top: 10px; font-size: 14px; color: #555"
+      ></div>
+    </div>
 
     <script src="app.js"></script>
   </body>
