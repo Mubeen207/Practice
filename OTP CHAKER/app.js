@@ -1,36 +1,31 @@
-let otpholder = 0;
+let Wrong = document.createElement("p");
+document.body.appendChild(Wrong);
+
+let otpholder = "";
 let otp_message = document.getElementById("otp-message");
+
 function sentotp() {
   let otp = "";
   for (let i = 0; i < 6; i++) {
-    otp = otp + Math.floor(Math.random() * 10);
-
+    otp += Math.floor(Math.random() * 10); // 0–9
   }
   otp_message.innerHTML = "Your OTP is " + otp;
-  //   alert("Your OTP is " + otp);
-  otpholder = otp;
+  otpholder = otp; // string rakha
 }
+
 function checkotp() {
   let otpInput = document.getElementById("otpInput");
-  let Wrong = document.createElement("p");
-  let body = document.body;
 
-  if (otpInput.value !== "" && otpholder <= 0) {
-    body.appendChild(Wrong);
-    Wrong.innerHTML = "Please Sent OTP First";
-  } else if (otpInput.value !== "" && otpholder <= 0) {
-    body.appendChild(Wrong);
+  if (otpholder === "") {
+    Wrong.innerHTML = "Please Send OTP First";
+  } else if (otpInput.value === "") {
     Wrong.innerHTML = "Please Enter OTP First";
-  } else if (otpInput.value >= 0 && otpholder === 0) {
-    body.appendChild(Wrong);
-    Wrong.innerHTML = "Please Sent OTP First";
-  } else if (parseInt(otpInput.value) === otpholder) {
-    body.appendChild(Wrong);
+  } else if (otpInput.value === otpholder) {
     Wrong.innerHTML = "Welcome";
-    otpholder = 0;
+    otpholder = ""; // reset OTP after success
   } else {
-    body.appendChild(Wrong);
-    Wrong.innerHTML = "Otp is wrong Try Again";
+    Wrong.innerHTML = "OTP is wrong, Try Again";
   }
+
   otpInput.value = "";
 }
