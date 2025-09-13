@@ -3,7 +3,8 @@ let otp_message = document.getElementById("otp-message");
 function sentotp() {
   let otp = "";
   for (let i = 0; i < 6; i++) {
-    otp = otp + Math.ceil(Math.random() * 9);
+    otp = otp + Math.floor(Math.random() * 10);
+
   }
   otp_message.innerHTML = "Your OTP is " + otp;
   //   alert("Your OTP is " + otp);
@@ -14,7 +15,7 @@ function checkotp() {
   let Wrong = document.createElement("p");
   let body = document.body;
 
-  if (otpInput.value > 0 && otpholder <= 0) {
+  if (otpInput.value !== "" && otpholder <= 0) {
     body.appendChild(Wrong);
     Wrong.innerHTML = "Please Sent OTP First";
   } else if (otpInput.value !== "" && otpholder <= 0) {
@@ -23,7 +24,7 @@ function checkotp() {
   } else if (otpInput.value >= 0 && otpholder === 0) {
     body.appendChild(Wrong);
     Wrong.innerHTML = "Please Sent OTP First";
-  } else if (otpholder === otpInput.value) {
+  } else if (parseInt(otpInput.value) === otpholder) {
     body.appendChild(Wrong);
     Wrong.innerHTML = "Welcome";
     otpholder = 0;
