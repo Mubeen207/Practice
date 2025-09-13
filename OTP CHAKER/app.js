@@ -1,9 +1,9 @@
 let Wrong = document.getElementById("otp");
 let timer = document.getElementById("timer");
 let otpInput = document.getElementById("otpInput");
+let otp_message = document.getElementById("otp-message");
 let second = 60;
 let otpholder = "";
-let otp_message = document.getElementById("otp-message");
 let otpInterval;
 let count = 0;
 let displaySecond;
