@@ -17,7 +17,7 @@ function checkotp() {
   if (otpInput.value > 0 && otpholder <= 0) {
     body.appendChild(Wrong);
     Wrong.innerHTML = "Please Sent OTP First";
-  } else if (otpInput !== "" && otpholder <= 0) {
+  } else if (otpInput.value !== "" && otpholder <= 0) {
     body.appendChild(Wrong);
     Wrong.innerHTML = "Please Enter OTP First";
   } else if (otpInput.value >= 0 && otpholder === 0) {
