@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <input type="text" id="otpInput" placeholder="Enter OTP" />
-    <div>
-      <button class="sentotp" onclick="sentotp()">Sent OTP</button>
-      <button class="checkotp" id="checkotpbutton" onclick="checkotp()">Check OTP</button>
+    <div class="main">
+      <h1>Two Step Verification</h1>
+      <input type="text" id="otpInput" placeholder="Enter OTP" />
+      <div>
+        <button class="sentotp" onclick="sentotp()">Sent OTP</button>
+        <button class="checkotp" id="checkotpbutton" onclick="checkotp()">
+          Check OTP
+        </button>
+      </div>
     </div>
     <p id="otp-message"></p>
     <script src="app.js"></script>

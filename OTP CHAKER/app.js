@@ -1,7 +1,7 @@
 let Wrong = document.createElement("p");
 let otpInput = document.getElementById("otpInput");
 
-document.body.insertBefore(Wrong, otpInput);
+document.body.childNodes[1].insertBefore(Wrong, otpInput);
 
 let otpholder = "";
 let otp_message = document.getElementById("otp-message");
