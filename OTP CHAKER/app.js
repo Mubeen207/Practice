@@ -60,6 +60,7 @@ function checkotp() {
     count++;
     closetimer();
     timer.innerHTML = "00 : 00";
+    otp_message.innerHTML = "";
   } else {
     Wrong.innerHTML = "OTP is wrong, Try Again";
     Wrong.style.color = "red";

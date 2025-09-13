@@ -117,6 +117,9 @@ input {
 .input-button {
   display: flex;
   width: 100%;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 .sentotp {
   color: blue;
@@ -124,12 +127,15 @@ input {
   border: 2px solid blue;
   border-radius: 5px;
   font-size: 15px;
+  height: 6.5vh;
+  font-size: 15px;
 }
 .sentotp:hover {
   color: white;
   background-color: blue;
   border: 2px solid blue;
   transition: 500ms;
+  cursor: pointer;
 }
 .checkotp {
   margin-top: 20px;
@@ -148,4 +154,5 @@ input {
   background-color: green;
   font-weight: bold;
   transition: 500ms;
+  cursor: pointer;
 }
