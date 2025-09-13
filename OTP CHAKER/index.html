@@ -8,16 +8,18 @@
   </head>
   <body>
     <div class="main">
-      <h1>Two Step Verification</h1>
-      <input type="text" id="otpInput" placeholder="Enter OTP" />
-      <div>
+      <h1>Verify Your Account</h1>
+      <p>Cheak your Whatsapp message for your OTP</p>
+      <p id="otp">Please Enter OTP</p>
+      <div class="input-button">
+        <input type="text" id="otpInput" placeholder="Enter OTP" />
         <button class="sentotp" onclick="sentotp()">Sent OTP</button>
-        <button class="checkotp" id="checkotpbutton" onclick="checkotp()">
-          Check OTP
-        </button>
       </div>
+      <button class="checkotp" id="checkotpbutton" onclick="checkotp()">
+        Verify
+      </button>
+      <p id="otp-message"></p>
     </div>
-    <p id="otp-message"></p>
     <script src="app.js"></script>
   </body>
 </html>
