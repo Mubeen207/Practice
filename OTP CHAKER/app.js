@@ -1,25 +1,40 @@
 window.onload = function () {
   let Wrong = document.getElementById("otp");
+  let timer = document.getElementById("timer");
   let otpInput = document.getElementById("otpInput");
-
+  let second = 60;
   let otpholder = "";
   let otp_message = document.getElementById("otp-message");
 
+  // function sentotp() {
+  //   generateOtp();
+
+  //   // clearInterval(otpInterval);
+
+  //   otpInterval = setInterval(generateOtp, 10000);
+  // }
+
+  // function generateOtp() {
+  //   let otp = "";
+  //   for (let i = 0; i < 6; i++) {
+  //     otp += Math.floor(Math.random() * 10);
+  //   }
+  //   otp_message.innerHTML = "Your OTP is " + otp;
+  //   otpholder = otp;
+  // }
+
   function sentotp() {
-    generateOtp();
-
-    // clearInterval(otpInterval);
-
-    otpInterval = setInterval(generateOtp, 10000);
-  }
-
-  function generateOtp() {
     let otp = "";
     for (let i = 0; i < 6; i++) {
-      otp += Math.floor(Math.random() * 10);
+      otp = otp + Math.floor(Math.random() * 10);
     }
     otp_message.innerHTML = "Your OTP is " + otp;
     otpholder = otp;
+
+    setInterval(function time() {
+      timer.innerHTML = "00 : " + second;
+      second--;
+    }, 1000);
   }
 
   function checkotp() {
