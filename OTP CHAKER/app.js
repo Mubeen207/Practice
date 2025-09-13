@@ -6,10 +6,12 @@ let otpholder = "";
 let otp_message = document.getElementById("otp-message");
 let otpInterval;
 let count = 0;
+let displaySecond;
 
 function sentotp() {
   if (count > 0) {
     otpInput.style.border = "0.5px solid black";
+    count = 0;
   }
   closetimer();
   let otp = "";
@@ -20,7 +22,12 @@ function sentotp() {
   otpholder = otp;
 
   otpInterval = setInterval(function () {
-    timer.innerHTML = "00 : " + (second < 10 ? "0" + second : second);
+    if (second < 10) {
+      displaySecond = "0" + second;
+    } else {
+      displaySecond = second;
+    }
+    timer.innerHTML = "00 : " + displaySecond;
     if (second > 0) {
       second--;
     } else {
@@ -28,6 +35,7 @@ function sentotp() {
       otp_message.innerHTML = "Your OTP is Expired";
       clearInterval(otpInterval);
       timer.innerHTML = "00 : 00";
+      otpInput.style.border = "0.5px solid black";
     }
   }, 1000);
 }
