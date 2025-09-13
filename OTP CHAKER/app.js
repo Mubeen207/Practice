@@ -2,7 +2,7 @@ let Wrong = document.getElementById("otp");
 let timer = document.getElementById("timer");
 let otpInput = document.getElementById("otpInput");
 let otp_message = document.getElementById("otp-message");
-let second = 59;
+let second = 10;
 let otpholder = "";
 let otpInterval;
 let displaySecond;
@@ -42,7 +42,7 @@ function sentotp() {
 
 function closetimer() {
   clearInterval(otpInterval);
-  second = 59;
+  second = 10;
 }
 
 function checkotp() {
