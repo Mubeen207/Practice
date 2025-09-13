@@ -2,17 +2,14 @@ let Wrong = document.getElementById("otp");
 let timer = document.getElementById("timer");
 let otpInput = document.getElementById("otpInput");
 let otp_message = document.getElementById("otp-message");
-let second = 60;
+let second = 59;
 let otpholder = "";
 let otpInterval;
-let count = 0;
 let displaySecond;
 
 function sentotp() {
-  if (count > 0) {
-    otpInput.style.border = "0.5px solid black";
-    count = 0;
-  }
+  otpInput.style.border = "0.5px solid black";
+
   closetimer();
   let otp = "";
   for (let i = 0; i < 6; i++) {
@@ -21,13 +18,16 @@ function sentotp() {
   otp_message.innerHTML = "Your OTP is " + otp;
   otpholder = otp;
 
+  timer.innerHTML = "01 : " + "00";
   otpInterval = setInterval(function () {
     if (second < 10) {
       displaySecond = "0" + second;
     } else {
       displaySecond = second;
     }
+
     timer.innerHTML = "00 : " + displaySecond;
+
     if (second > 0) {
       second--;
     } else {
@@ -42,7 +42,7 @@ function sentotp() {
 
 function closetimer() {
   clearInterval(otpInterval);
-  second = 60;
+  second = 59;
 }
 
 function checkotp() {
@@ -57,7 +57,7 @@ function checkotp() {
     Wrong.style.color = "green";
     otpholder = "";
     otpInput.style.border = "2px solid green";
-    count++;
+
     closetimer();
     timer.innerHTML = "00 : 00";
     otp_message.innerHTML = "";
@@ -66,7 +66,6 @@ function checkotp() {
     Wrong.style.color = "red";
     if (otpInput.value !== otpholder) {
       otpInput.style.border = "2px solid red";
-      count++;
     }
   }
   otpInput.value = "";
