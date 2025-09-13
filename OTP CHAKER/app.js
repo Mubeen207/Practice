@@ -1,59 +1,60 @@
-window.onload = function () {
-  let Wrong = document.getElementById("otp");
-  let timer = document.getElementById("timer");
-  let otpInput = document.getElementById("otpInput");
-  let second = 60;
-  let otpholder = "";
-  let otp_message = document.getElementById("otp-message");
+let Wrong = document.getElementById("otp");
+let timer = document.getElementById("timer");
+let otpInput = document.getElementById("otpInput");
+let second = 60;
+let otpholder = "";
+let otp_message = document.getElementById("otp-message");
 
-  // function sentotp() {
-  //   generateOtp();
+// function sentotp() {
+//   generateOtp();
 
-  //   // clearInterval(otpInterval);
+//   // clearInterval(otpInterval);
 
-  //   otpInterval = setInterval(generateOtp, 10000);
-  // }
+//   otpInterval = setInterval(generateOtp, 10000);
+// }
 
-  // function generateOtp() {
-  //   let otp = "";
-  //   for (let i = 0; i < 6; i++) {
-  //     otp += Math.floor(Math.random() * 10);
-  //   }
-  //   otp_message.innerHTML = "Your OTP is " + otp;
-  //   otpholder = otp;
-  // }
+// function generateOtp() {
+//   let otp = "";
+//   for (let i = 0; i < 6; i++) {
+//     otp += Math.floor(Math.random() * 10);
+//   }
+//   otp_message.innerHTML = "Your OTP is " + otp;
+//   otpholder = otp;
+// }
 
-  function sentotp() {
-    let otp = "";
-    for (let i = 0; i < 6; i++) {
-      otp = otp + Math.floor(Math.random() * 10);
-    }
-    otp_message.innerHTML = "Your OTP is " + otp;
-    otpholder = otp;
+function sentotp() {
+  let otp = "";
+  for (let i = 0; i < 6; i++) {
+    otp = otp + Math.floor(Math.random() * 10);
+  }
+  otp_message.innerHTML = "Your OTP is " + otp;
+  otpholder = otp;
 
-    setInterval(function time() {
-      timer.innerHTML = "00 : " + second;
+  let otpInterval = setInterval(function time() {
+    timer.innerHTML = "00 : " + second;
+    if (second > 0) {
       second--;
-    }, 1000);
-  }
-
-  function checkotp() {
-    if (otpholder === "") {
-      Wrong.innerHTML = "Please Send OTP First";
-    } else if (otpInput.value === "") {
-      Wrong.innerHTML = "Please Enter OTP First";
-    } else if (otpInput.value === otpholder) {
-      Wrong.innerHTML = "Welcome";
-      Wrong.style.color = "green";
-      otpholder = "";
     } else {
-      Wrong.innerHTML = "OTP is wrong, Try Again";
-      Wrong.style.color = "red";
+      otpholder = "";
+      otp_message.innerHTML = "Your OTP is " + "Expired";
+      clearInterval(otpInterval);
+      second = 60;
     }
-    otpInput.value = "";
-  }
+  }, 1000);
+}
 
-  // make functions global so HTML buttons can use them
-  window.sentotp = sentotp;
-  window.checkotp = checkotp;
-};
+function checkotp() {
+  if (otpholder === "") {
+    Wrong.innerHTML = "Please Send OTP First";
+  } else if (otpInput.value === "") {
+    Wrong.innerHTML = "Please Enter OTP First";
+  } else if (otpInput.value === otpholder) {
+    Wrong.innerHTML = "Welcome";
+    Wrong.style.color = "green";
+    otpholder = "";
+  } else {
+    Wrong.innerHTML = "OTP is wrong, Try Again";
+    Wrong.style.color = "red";
+  }
+  otpInput.value = "";
+}
