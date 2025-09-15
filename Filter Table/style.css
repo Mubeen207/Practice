@@ -1,4 +1,4 @@
-* {
+/* * {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 body {
@@ -74,4 +74,117 @@ tr:nth-child(even) {
 .header {
   background-color: blue;
   color: white;
+} */
+* {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  background-color: white;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0.5px solid black;
+  border-radius: 5px;
+}
+
+#myInput {
+  margin-bottom: 15px;
+}
+#name1 {
+  margin-bottom: 5px;
+}
+
+#notFoundRow td {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  background-color: #ffe5e5;
+}
+
+.add-btn {
+  width: 100%;
+  max-width: 150px;
+  height: 40px;
+  font-size: 18px;
+  color: green;
+  border: 2px solid green;
+  font-weight: bold;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}
+.add-btn:hover {
+  color: white;
+  background-color: green;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.main {
+  border: 1px solid rgb(53, 51, 51);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  margin: 0 auto 15px auto;
+  width: 100%;
+  max-width: 500px; /* Desktop ke liye max width */
+}
+
+/* Table Styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+  word-wrap: break-word;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.header {
+  background-color: blue;
+  color: white;
+}
+
+/* ✅ Mobile Responsive (max 600px) */
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  .main {
+    width: 100%;
+    padding: 10px;
+  }
+  input {
+    font-size: 14px;
+    height: 36px;
+  }
+  .add-btn {
+    font-size: 16px;
+    height: 36px;
+  }
+  table {
+    font-size: 12px;
+  }
 }
