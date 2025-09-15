@@ -20,9 +20,16 @@ input {
 #myInput {
   margin-bottom: 15px;
 }
-#name1{
-    margin-bottom: 5px;
+#name1 {
+  margin-bottom: 5px;
 }
+#notFoundRow td {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  background-color: #ffe5e5;
+}
+
 .add-btn {
   width: 15%;
   height: 38px;
