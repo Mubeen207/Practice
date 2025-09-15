@@ -13,7 +13,13 @@
       onkeyup="myFunction()"
       placeholder="Search for names.."
     />
-
+    <div class="main">
+      <div>
+        <input id="name" type="text" placeholder="City Name" onkeyup="borderReset()"/>
+        <input id="country" type="text" placeholder="Country Name" />
+      </div>
+      <button class="add-btn" onclick="add()">Add</button>
+    </div>
     <table id="myTable">
       <tr class="header">
         <th class="name">Name</th>
