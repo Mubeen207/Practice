@@ -191,4 +191,22 @@ tr:nth-child(even) {
   table {
     font-size: 12px;
   }
+  .add-btn:hover {
+  color: green;
+  background-color: white;
+}
+  .add-btn:active {
+    animation: clickFlash 1s forwards;
+  }
+}
+
+@keyframes clickFlash {
+  0% {
+    background-color: green;
+    color: white;
+  }
+  100% {
+    background-color: white;
+    color: green;
+  }
 }
