@@ -132,6 +132,10 @@ input {
   transition: 0.5s;
   cursor: pointer;
 }
+.add-btn:active {
+  background-color: darkgreen;
+  color: white;
+}
 
 .main {
   border: 1px solid rgb(53, 51, 51);
