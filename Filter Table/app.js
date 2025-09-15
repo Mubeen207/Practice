@@ -87,14 +87,17 @@ function recheak(start) {
 
     if (name1.value.toLowerCase() === foundedCountry) {
       alert("Your Enterd City Name is a Country Name Only City Name Allowed");
+      name1.value = "";
       return (start = false);
     } else if (country.value.toLowerCase() === foundedCity) {
       alert(
         "Your Enterd Country Name is a City Name Only Country Name Allowed"
       );
+      country.value = "";
       return (start = false);
     } else if (name1.value.toLowerCase() === foundedCity) {
       alert("Duplicate City Not Allowed");
+      name1.value = "";
       return (start = false);
     }
   }
