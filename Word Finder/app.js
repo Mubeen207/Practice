@@ -8,7 +8,7 @@ function findWord() {
     let char = para.slice(i, i + length);
     if (char === finding_word) {
       count++;
-      console.log(i+1);
+      // console.log(i+1);
       
     }
   }

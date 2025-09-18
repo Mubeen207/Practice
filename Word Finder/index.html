@@ -14,7 +14,7 @@
         <br>
 
         <label for="word">Enter the word to find:</label>
-        <input type="text" id="word" onkeydown="checkEnter(event)" placeholder="Type a word">
+        <input type="text" id="word" onkeyup="findWord()" onkeydown="checkEnter(event)" placeholder="Type a word">
         <br>
 
         <button onclick="findWord()"  >Find Word</button>
