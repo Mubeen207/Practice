@@ -12,8 +12,10 @@ function sentotp() {
 
   closetimer();
   let otp = "";
+  let otp1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
   for (let i = 0; i < 6; i++) {
-    otp += Math.floor(Math.random() * 10);
+    otplenght = Math.floor(Math.random() * otp1.length);
+    otp += otp1[otplenght];
   }
   otp_message.innerHTML = "Your OTP is " + otp;
   otpholder = otp;
