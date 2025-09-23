@@ -11,6 +11,7 @@ firebase.initializeApp(firebaseConfig);
 
 let emailEl = document.getElementById("email");
 let passwordEl = document.getElementById("password");
+let todoEl = document.getElementById("todo");
 let fb = firebase.auth();
 const db = firebase.firestore();
 
@@ -68,7 +69,7 @@ function redirectToHome() {
 function addTodo() {
   db.collection("todos")
     .add({
-      todo: "5PM Meeting",
+      todo: todoEl.value,
       uid: localStorage.getItem("uid"),
     })
     .then((docRef) => {
