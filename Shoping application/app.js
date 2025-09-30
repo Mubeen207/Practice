@@ -86,6 +86,8 @@ function forgotPassword() {
   message.classList.remove("show", "message-error", "message-success");
 
   // Firebase ko reset email bhejne ke liye bolein
+  console.log(email);
+  
   fb.sendPasswordResetEmail(email)
     .then(() => {
       // Jab email chali jaye
