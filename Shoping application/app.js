@@ -87,7 +87,7 @@ function forgotPassword() {
 
   // Firebase ko reset email bhejne ke liye bolein
   console.log(email);
-  
+
   fb.sendPasswordResetEmail(email)
     .then(() => {
       // Jab email chali jaye
@@ -182,6 +182,7 @@ function makeListing(doc) {
 
   let editBtn = document.createElement("button");
   let deleteBtn = document.createElement("button");
+  let cartBtn = document.createElement("button");
 
   let pTextNode = document.createTextNode(doc.name);
   let pTextNode1 = document.createTextNode(doc.product);
@@ -190,6 +191,7 @@ function makeListing(doc) {
 
   let deleteTextNode = document.createTextNode("Delete");
   let editTextNode = document.createTextNode("Edit");
+  let cartTextNode = document.createTextNode("Add to Cart");
 
   div.setAttribute("id", doc.id);
   p1.appendChild(pTextNode);
@@ -202,15 +204,22 @@ function makeListing(doc) {
   div.appendChild(p4);
   deleteBtn.appendChild(deleteTextNode);
   editBtn.appendChild(editTextNode);
+  cartBtn.appendChild(cartTextNode);
 
   editBtn.setAttribute("onClick", "edit(this)");
   deleteBtn.setAttribute("onClick", "deleteItem(this)");
 
   editBtn.classList.add("btn", "btn-edit");
   deleteBtn.classList.add("btn", "btn-delete");
+  cartBtn.classList.add("btn", "btn-cart");
+
+  cartBtn.setAttribute("onClick", "addToCart(this)");
+
+  cartBtn.style.color = "black";
 
   div.appendChild(deleteBtn);
   div.appendChild(editBtn);
+  div.appendChild(cartBtn);
 
   div.classList.add("product-card");
   divListing.appendChild(div);
@@ -281,4 +290,22 @@ function deleteItem(deleteEl) {
 
 function tilteCase(tilteCase) {
   return tilteCase[0].toUpperCase() + tilteCase.slice(1).toLowerCase();
+}
+function addToCart(cartEl) {
+  let cartProducts = cartEl.parentNode.childNodes;
+  console.log(cartEl.parentNode.childNodes);
+  db.collection("Cart Products")
+      .add({
+        name: cartProducts[0].innerHTML,
+        price: cartProducts[1].innerHTML,
+        details: cartProducts[2].innerHTML,
+        location: cartProducts[3].innerHTML,
+        uid: fb.currentUser.uid,
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
 }
