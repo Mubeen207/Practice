@@ -96,11 +96,11 @@ function signOut() {
   localStorage.clear();
   fb.signOut()
     .then(() => {
-      console.log("Sign Out");
+      // console.log("Sign Out");
       window.location.href = "./index.html";
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
     });
 }
 
@@ -126,10 +126,10 @@ function addProduct() {
         uid: fb.currentUser.uid,
       })
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document written with ID: ", docRef.id);
       })
       .catch((error) => {
-        console.error("Error adding document: ", error);
+        // console.error("Error adding document: ", error);
       });
     name1El.value = "";
     productEl.value = "";
@@ -146,14 +146,14 @@ function getProducts() {
         if (change.type === "added") {
           let docData = change.doc.data();
           docData.id = change.doc.id;
-          console.log("New city: ", docData);
+          // console.log("New city: ", docData);
           makeListing(docData);
         }
         if (change.type === "modified") {
-          console.log("Modified city: ", change.doc.data());
+          // console.log("Modified city: ", change.doc.data());
         }
         if (change.type === "removed") {
-          console.log("Removed city: ", change.doc.data());
+          // console.log("Removed city: ", change.doc.data());
         }
       });
     });
@@ -240,10 +240,10 @@ function editFirebase() {
         location: tilteCase(locationEl.value),
       })
       .then(() => {
-        console.log("Document successfully updated!");
+        // console.log("Document successfully updated!");
       })
       .catch((error) => {
-        console.error("Error updating document: ", error);
+        // console.error("Error updating document: ", error);
       });
     editValueId.childNodes[0].innerHTML = tilteCase(name1El.value);
     editValueId.childNodes[1].innerHTML = tilteCase(productEl.value);
@@ -265,17 +265,17 @@ function deleteItem(deleteEl) {
   detailsEl.value = "";
   locationEl.value = "";
   let deleteId = deleteEl.parentNode.id;
-  console.log(deleteId);
+  // console.log(deleteId);
   divListing.removeChild(deleteEl.parentNode);
   db.collection("Shopping")
     .doc(deleteId)
     .delete()
     .then(() => {
-      console.log("Document successfully deleted!");
+      // console.log("Document successfully deleted!");
       deleteId = undefined;
     })
     .catch((error) => {
-      console.error("Error removing document: ", error);
+      // console.error("Error removing document: ", error);
     });
 }
 
@@ -286,7 +286,7 @@ function addToCart(cartEl) {
   let cartProducts = cartEl.parentNode.childNodes;
   // console.log(cartProducts[1].innerText);
 
-  console.log(cartEl.parentNode.childNodes);
+  // console.log(cartEl.parentNode.childNodes);
   db.collection("Cart Products")
     .add({
       name: cartProducts[0].innerHTML,
@@ -296,11 +296,11 @@ function addToCart(cartEl) {
       uid: fb.currentUser.uid,
     })
     .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
       alert("Cart Added Successfully");
     })
     .catch((error) => {
-      console.error("Error adding document: ", error);
+      // console.error("Error adding document: ", error);
     });
 }
 let cartListingEl = document.getElementById("cartListing");
@@ -313,14 +313,14 @@ function getProductsCart() {
         if (change.type === "added") {
           let docData = change.doc.data();
           docData.id = change.doc.id;
-          console.log("New city: ", docData);
+          // console.log("New city: ", docData);
           makeListingcart(docData);
         }
         if (change.type === "modified") {
-          console.log("Modified city: ", change.doc.data());
+          // console.log("Modified city: ", change.doc.data());
         }
         if (change.type === "removed") {
-          console.log("Removed city: ", change.doc.data());
+          // console.log("Removed city: ", change.doc.data());
         }
       });
     });
@@ -368,16 +368,16 @@ function makeListingcart(doc) {
 }
 function deleteCart(deleteEl) {
   let deleteId = deleteEl.parentNode.id;
-  console.log(deleteId);
+  // console.log(deleteId);
   // console.log(deleteEl.parentNode.parentNode);
   cartListingEl.removeChild(deleteEl.parentNode);
   db.collection("Cart Products")
     .doc(deleteId)
     .delete()
     .then(() => {
-      console.log("Document successfully deleted!");
+      // console.log("Document successfully deleted!");
     })
     .catch((error) => {
-      console.error("Error removing document: ", error);
+      // console.error("Error removing document: ", error);
     });
 }
