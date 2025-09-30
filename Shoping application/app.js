@@ -27,10 +27,11 @@ function signUp() {
       localStorage.setItem("uid", JSON.stringify(fb.currentUser));
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      message.innerHTML = errorCode + " " + errorMessage;
-      message.style.color = "red";
+      let errorCode = error.code;
+      message.innerHTML = errorMessage(errorCode);
+
+      message.classList.add("show", "message-error");
+      message.classList.remove("message-success");
     });
 }
 
@@ -48,6 +49,53 @@ function signIn() {
       var errorMessage = error.message;
       message.innerHTML = errorCode + " " + errorMessage;
       message.style.color = "red";
+    });
+}
+
+function errorMessage(Code) {
+  if (Code === "auth/wrong-password") {
+    return "Incorrect password. Please try again.";
+  } else if (Code === "auth/user-not-found") {
+    return "No account found with this email.";
+  } else if (Code === "auth/invalid-email") {
+    return "The email address is not valid.";
+  } else if (Code === "auth/email-already-in-use") {
+    return "This email address is already in use.";
+  } else if (Code === "auth/weak-password") {
+    return "Password is too weak. It should be at least 6 characters long.";
+  } else {
+    return "An unknown error occurred. Please try again.";
+  }
+}
+
+// Is function ko signOut ke baad add karein
+
+function forgotPassword() {
+  message = document.getElementById("message");
+  let email = emailEl.value; // Email field se email hasil karein
+
+  // Check karein ke user ne email dala hai ya nahi
+  if (email === "") {
+    message.textContent = "Please enter your email address first.";
+    message.classList.add("show", "message-error");
+    return; // Function ko yahin rok dein
+  }
+  
+  // Purana message saaf karein
+  message.textContent = "";
+  message.classList.remove("show", "message-error", "message-success");
+
+  // Firebase ko reset email bhejne ke liye bolein
+  fb.sendPasswordResetEmail(email)
+    .then(() => {
+      // Jab email chali jaye
+      message.textContent = "Password reset email sent! Please check your inbox.";
+      message.classList.add("show", "message-success");
+    })
+    .catch((error) => {
+      // Agar koi error aaye (maslan, email register na ho)
+      message.textContent = errorMessage(error.code); // Humara purana function istemal karein
+      message.classList.add("show", "message-error");
     });
 }
 
@@ -155,15 +203,13 @@ function makeListing(doc) {
   editBtn.setAttribute("onClick", "edit(this)");
   deleteBtn.setAttribute("onClick", "deleteItem(this)");
 
-editBtn.classList.add("btn", "btn-edit");
+  editBtn.classList.add("btn", "btn-edit");
   deleteBtn.classList.add("btn", "btn-delete");
 
   div.appendChild(deleteBtn);
   div.appendChild(editBtn);
-// div.style.border = "1px solid Black"
-// div.style.padding = "4px"
-  
-div.classList.add("product-card");
+
+  div.classList.add("product-card");
   divListing.appendChild(div);
 }
 
@@ -175,8 +221,6 @@ function edit(editEl) {
   productEl.value = editEl.parentNode.childNodes[1].innerHTML;
   detailsEl.value = editEl.parentNode.childNodes[2].innerHTML;
   locationEl.value = editEl.parentNode.childNodes[3].innerHTML;
-  // editValue = editEl.parentNode;
-  // name1El.value = editValue.firstChild.nodeValue;
 }
 function editFirebase() {
   if (

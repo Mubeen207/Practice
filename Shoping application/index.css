@@ -1,19 +1,19 @@
 /* --- Google Font & Font Awesome Icons Import --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 
 /* --- VIP CSS Variables (Same as before) --- */
 :root {
-  --primary-color: #8A2BE2; /* Violet Blue */
+  --primary-color: #8a2be2; /* Violet Blue */
   --primary-glow: rgba(138, 43, 226, 0.3);
-  --primary-gradient: linear-gradient(45deg, #8A2BE2, #4B0082);
-  
+  --primary-gradient: linear-gradient(45deg, #8a2be2, #4b0082);
+
   --bg-dark: #121212; /* Dark Background */
-  --bg-card: #1E1E1E; /* Slightly Lighter Card BG */
-  
-  --text-primary: #EAEAEA;
-  --text-secondary: #A0A0A0;
-  
+  --bg-card: #1e1e1e; /* Slightly Lighter Card BG */
+
+  --text-primary: #eaeaea;
+  --text-secondary: #a0a0a0;
+
   --border-color: #333333;
   --radius-md: 12px;
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -21,14 +21,20 @@
 
 /* --- Keyframe Animations --- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* --- General Body Styling --- */
 body {
   background: var(--bg-dark);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: var(--text-primary);
   display: flex;
   justify-content: center;
@@ -42,7 +48,7 @@ body {
   background: var(--bg-card);
   padding: 40px;
   border-radius: var(--radius-md);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   border: 1px solid var(--border-color);
   width: 100%;
   max-width: 400px;
@@ -108,7 +114,7 @@ body {
 
 .button-group button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary {
@@ -129,4 +135,23 @@ body {
   min-height: 20px;
   margin-bottom: 15px;
   font-weight: 500;
+}
+
+/* Add this at the end of index.css */
+
+.forgot-password-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.forgot-password-container a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-container a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
 }
