@@ -80,7 +80,7 @@ function forgotPassword() {
     message.classList.add("show", "message-error");
     return; // Function ko yahin rok dein
   }
-  
+
   // Purana message saaf karein
   message.textContent = "";
   message.classList.remove("show", "message-error", "message-success");
@@ -89,7 +89,8 @@ function forgotPassword() {
   fb.sendPasswordResetEmail(email)
     .then(() => {
       // Jab email chali jaye
-      message.textContent = "Password reset email sent! Please check your inbox.";
+      message.textContent =
+        "Password reset email sent! Please check your inbox.";
       message.classList.add("show", "message-success");
     })
     .catch((error) => {
@@ -258,6 +259,10 @@ function editFirebase() {
 }
 
 function deleteItem(deleteEl) {
+  name1El.value = "";
+  productEl.value = "";
+  detailsEl.value = "";
+  locationEl.value = "";
   let deleteId = deleteEl.parentNode.id;
   console.log(deleteId);
   divListing.removeChild(deleteEl.parentNode);
