@@ -14,13 +14,12 @@ let emailEl = document.getElementById("email");
 let passwordEl = document.getElementById("password");
 let message = document.getElementById("message");
 let addBtn = document.getElementById("addBtn");
-let editValue;
 
+let editValueId;
 // Authentication
 function signUp() {
   fb.createUserWithEmailAndPassword(emailEl.value, passwordEl.value)
     .then((userCredential) => {
-
       var user = userCredential.user;
       message.innerHTML = "Sign up Successful";
       message.style.color = "green";
@@ -66,23 +65,38 @@ function signOut() {
 
 // Firestore
 let name1El = document.getElementById("name1");
+let productEl = document.getElementById("product");
+let detailsEl = document.getElementById("details");
+let locationEl = document.getElementById("location");
 
-function addTodo() {
-  db.collection("Shopping")
-    .add({
-      todo: name1El.value,
-      uid: fb.currentUser.uid,
-    })
-    .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-  name1El.value = "";
+function addProduct() {
+  if (
+    name1El.value !== "" &&
+    productEl.value !== "" &&
+    detailsEl.value !== "" &&
+    locationEl.value !== ""
+  ) {
+    db.collection("Shopping")
+      .add({
+        name: tilteCase(name1El.value),
+        product: tilteCase(productEl.value),
+        details: tilteCase(detailsEl.value),
+        location: tilteCase(locationEl.value),
+        uid: fb.currentUser.uid,
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+    name1El.value = "";
+    productEl.value = "";
+    detailsEl.value = "";
+    locationEl.value = "";
+  }
 }
-
-function getTodos() {
+function getProducts() {
   let uidData = JSON.parse(localStorage.getItem("uid"));
   db.collection("Shopping")
     .where("uid", "==", uidData.uid)
@@ -109,54 +123,93 @@ let divListing = document.getElementById("listing");
 function makeListing(doc) {
   // console.log(doc.id);
 
-  let p = document.createElement("p");
+  let div = document.createElement("div");
+  let p1 = document.createElement("p");
+  let p2 = document.createElement("p");
+  let p3 = document.createElement("p");
+  let p4 = document.createElement("p");
 
   let editBtn = document.createElement("button");
   let deleteBtn = document.createElement("button");
 
-  let pTextNode = document.createTextNode(doc.todo);
+  let pTextNode = document.createTextNode(doc.name);
+  let pTextNode1 = document.createTextNode(doc.product);
+  let pTextNode2 = document.createTextNode(doc.details);
+  let pTextNode3 = document.createTextNode(doc.location);
 
   let deleteTextNode = document.createTextNode("Delete");
   let editTextNode = document.createTextNode("Edit");
 
-  p.setAttribute("id", doc.id);
-  p.appendChild(pTextNode);
-
+  div.setAttribute("id", doc.id);
+  p1.appendChild(pTextNode);
+  p2.appendChild(pTextNode1);
+  p3.appendChild(pTextNode2);
+  p4.appendChild(pTextNode3);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+  div.appendChild(p4);
   deleteBtn.appendChild(deleteTextNode);
   editBtn.appendChild(editTextNode);
 
   editBtn.setAttribute("onClick", "edit(this)");
   deleteBtn.setAttribute("onClick", "deleteItem(this)");
 
-  p.appendChild(deleteBtn);
-  p.appendChild(editBtn);
+  div.appendChild(deleteBtn);
+  div.appendChild(editBtn);
+  div.style.display = "flex"
+  div.style.flexDirection = "column"
+  div.style.border = "1px solid black"
+  div.style.width = "100%"
+  
 
-  divListing.appendChild(p);
+  divListing.appendChild(div);
 }
 
 function edit(editEl) {
-  addBtn.innerHTML = "Save Todo";
+  addBtn.innerHTML = "Save Product";
   addBtn.setAttribute("onClick", "editFirebase()");
-
-  editValue = editEl.parentNode;
-  name1El.value = editValue.firstChild.nodeValue;
+  editValueId = editEl.parentNode;
+  name1El.value = editEl.parentNode.childNodes[0].innerHTML;
+  productEl.value = editEl.parentNode.childNodes[1].innerHTML;
+  detailsEl.value = editEl.parentNode.childNodes[2].innerHTML;
+  locationEl.value = editEl.parentNode.childNodes[3].innerHTML;
+  // editValue = editEl.parentNode;
+  // name1El.value = editValue.firstChild.nodeValue;
 }
 function editFirebase() {
-  db.collection("Shopping")
-    .doc(editValue.id)
-    .update({
-      todo: name1El.value,
-    })
-    .then(() => {
-      console.log("Document successfully updated!");
-      addBtn.innerHTML = "Add Todo";
-      addBtn.onclick = "addBtn()";
-    })
-    .catch((error) => {
-      console.error("Error updating document: ", error);
-    });
-  editValue.firstChild.nodeValue = name1El.value;
-  name1El.value = "";
+  if (
+    name1El.value !== "" &&
+    productEl.value !== "" &&
+    detailsEl.value !== "" &&
+    locationEl.value !== ""
+  ) {
+    db.collection("Shopping")
+      .doc(editValueId.id)
+      .update({
+        name: tilteCase(name1El.value),
+        product: tilteCase(productEl.value),
+        details: tilteCase(detailsEl.value),
+        location: tilteCase(locationEl.value),
+      })
+      .then(() => {
+        console.log("Document successfully updated!");
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+      });
+    editValueId.childNodes[0].innerHTML = tilteCase(name1El.value);
+    editValueId.childNodes[1].innerHTML = tilteCase(productEl.value);
+    editValueId.childNodes[2].innerHTML = tilteCase(detailsEl.value);
+    editValueId.childNodes[3].innerHTML = tilteCase(locationEl.value);
+    addBtn.innerHTML = "Add Product";
+    addBtn.setAttribute("onClick", "addProduct()");
+
+    name1El.value = "";
+    productEl.value = "";
+    detailsEl.value = "";
+    locationEl.value = "";
+  }
 }
 
 function deleteItem(deleteEl) {
@@ -172,4 +225,8 @@ function deleteItem(deleteEl) {
     .catch((error) => {
       console.error("Error removing document: ", error);
     });
+}
+
+function tilteCase(tilteCase) {
+  return tilteCase[0].toUpperCase() + tilteCase.slice(1).toLowerCase();
 }

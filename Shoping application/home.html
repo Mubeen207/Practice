@@ -3,15 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FireBase Todo</title>
+    <title>Shopping Application</title>
   </head>
 
-  <body onLoad="getTodos()">
+  <body onLoad="getProducts()">
     <p id="message"></p>
     <h1>Welcome to Shoping Application</h1>
     <button onClick="signOut()">Sign Out</button><br />
-    <input type="text" id="name1" />
-    <button onClick="addTodo()" id="addBtn" >Add Todo</button>
+    <input type="text" id="name1" placeholder="Enter Your Name"/>
+    <input type="text" id="product" placeholder="Enter Product"/>
+    <input type="text" id="details" placeholder="Enter Details"/>
+    <input type="text" id="location" placeholder="Enter Location"/>
+    <button onClick="addProduct()" id="addBtn" >Add Product</button>
     <div id="listing"></div>
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
