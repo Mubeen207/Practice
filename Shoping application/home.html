@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Application</title>
   </head>
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <body onLoad="getProducts()">
     <p id="message"></p>
-<h1>Welcome to Shopping Application</h1>
+    <h1>Welcome to Shopping Application</h1>
 
-<div class="header-nav">
-    <a href="./cart.html" class="nav-link">Your Carts</a>
-    <button class="signout-btn" onclick="signOut()">Sign Out</button>
-</div>
+    <div class="header-nav">
+      <a href="./cart.html" class="nav-link">Your Carts</a>
+      <button class="signout-btn" onclick="signOut()">Sign Out</button>
+    </div>
 
-<div class="form-container">
-  <input type="text" id="name1" placeholder="Enter Product Name"/>
-  <input type="text" id="product" placeholder="Enter Product Price"/>
-  <input type="text" id="details" placeholder="Enter Details"/>
-  <input type="text" id="location" placeholder="Enter Location"/>
-  <button onClick="addProduct()" id="addBtn">Add Product</button>
-</div>
+    <div class="form-container">
+      <input type="text" id="name1" placeholder="Enter Product Name" />
+      <input type="text" id="product" placeholder="Enter Product Price" />
+      <input type="text" id="details" placeholder="Enter Details" />
+      <input type="text" id="location" placeholder="Enter Location" />
+      <button onClick="addProduct()" id="addBtn">Add Product</button>
+    </div>
 
-<div id="listing"></div>
+    <div id="listing"></div>
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>

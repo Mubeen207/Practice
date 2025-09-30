@@ -297,6 +297,7 @@ function addToCart(cartEl) {
     })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
+      alert("Cart Added Successfully");
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
