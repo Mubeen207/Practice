@@ -4,19 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FireBase Authentication</title>
-    <!-- <style>
-      body{
-        flex-direction: column;
-      }
-    </style> -->
+    <link rel="stylesheet" href="index.css" />
   </head>
 
   <body>
-    <p id="message"></p>
-    Email: <input type="email" name="email" id="email" /> Password:
-    <input type="password" name="password" id="password" />
-    <button onClick="signUp()">Sign Up</button>
-    <button onClick="signIn()">Sign In</button>
+    <div class="login-container">
+      <h1>Welcome</h1>
+      <p>Sign in or create a new account</p>
+
+      <p id="message"></p>
+
+      <div class="input-group">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+
+      <div class="button-group">
+        <button class="btn-secondary" onClick="signUp()">Sign Up</button>
+        <button class="btn-primary" onClick="signIn()">Sign In</button>
+      </div>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>

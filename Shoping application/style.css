@@ -1,0 +1,184 @@
+/* --- Google Font & Font Awesome Icons Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* --- VIP CSS Variables --- */
+:root {
+  --primary-color: #8A2BE2; /* Violet Blue */
+  --primary-glow: rgba(138, 43, 226, 0.3);
+  --primary-gradient: linear-gradient(45deg, #8A2BE2, #4B0082);
+  --danger-gradient: linear-gradient(45deg, #DC143C, #8B0000);
+  
+  --bg-dark: #121212; /* Dark Background */
+  --bg-card: #1E1E1E; /* Slightly Lighter Card BG */
+  
+  --text-primary: #EAEAEA;
+  --text-secondary: #A0A0A0;
+  
+  --border-color: #333333;
+  --radius-md: 10px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- General Body Styling --- */
+body {
+  background: var(--bg-dark);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 20px;
+}
+
+/* --- Heading --- */
+h1 {
+  color: var(--text-primary);
+  margin-bottom: 25px;
+  animation: fadeInScale 0.6s ease-out;
+  letter-spacing: 1px;
+}
+
+/* --- Form Container --- */
+.form-container {
+  background: var(--bg-card);
+  padding: 30px 35px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+  max-width: 400px;
+  margin: 0 auto 40px auto;
+  text-align: left;
+  animation: fadeInScale 0.7s ease-out;
+}
+
+/* --- Modern Underline Inputs --- */
+.form-container input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 20px 0;
+  padding: 10px 5px;
+  border: none;
+  border-bottom: 2px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 15px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-container input:focus {
+  border-bottom-color: var(--primary-color);
+  box-shadow: 0 4px 10px -8px var(--primary-color);
+}
+
+/* --- "Aurora" VIP Button Styling --- */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button::before { /* For CSS Icons */
+  margin-right: 8px;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+}
+
+button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* --- Add Product Button --- */
+#addBtn {
+  width: 100%;
+  background-image: var(--primary-gradient);
+  padding: 14px;
+  margin-top: 10px;
+}
+#addBtn::before { content: '\f067'; } /* Plus Icon */
+#addBtn.edit-mode::before { content: '\f0c7'; } /* Save Icon */
+
+
+/* --- Sign Out Button --- */
+.signout-btn {
+  background-image: var(--danger-gradient);
+  padding: 10px 18px;
+  margin-bottom: 20px;
+}
+.signout-btn::before { content: '\f2f5'; } /* Sign Out Icon */
+
+/* --- Product Listing --- */
+#listing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* --- Glowing Gradient Border Card --- */
+.product-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border: 2px solid var(--border-color);
+  animation: fadeInScale 0.8s ease-out backwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  transition: var(--transition);
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 25px var(--primary-glow);
+}
+
+/* --- Product Card Text --- */
+.product-card p {
+  margin: 0 0 10px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+.product-card p:first-child {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+
+/* --- Card Buttons --- */
+.btn {
+  width: 95px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  margin: 8px 8px 0 0;
+  font-size: 14px;
+  padding: 0;
+}
+
+.btn-edit { background-image: var(--primary-gradient); }
+.btn-edit::before { content: '\f303'; } /* Pencil Icon */
+
+.btn-delete { background-image: var(--danger-gradient); }
+.btn-delete::before { content: '\f2ed'; } /* Trash Icon */

@@ -155,14 +155,15 @@ function makeListing(doc) {
   editBtn.setAttribute("onClick", "edit(this)");
   deleteBtn.setAttribute("onClick", "deleteItem(this)");
 
+editBtn.classList.add("btn", "btn-edit");
+  deleteBtn.classList.add("btn", "btn-delete");
+
   div.appendChild(deleteBtn);
   div.appendChild(editBtn);
-  div.style.display = "flex"
-  div.style.flexDirection = "column"
-  div.style.border = "1px solid black"
-  div.style.width = "100%"
+// div.style.border = "1px solid Black"
+// div.style.padding = "4px"
   
-
+div.classList.add("product-card");
   divListing.appendChild(div);
 }
 
