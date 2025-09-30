@@ -45,10 +45,11 @@ function signIn() {
       localStorage.setItem("uid", JSON.stringify(fb.currentUser));
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      message.innerHTML = errorCode + " " + errorMessage;
-      message.style.color = "red";
+      let errorCode = error.code;
+      message.innerHTML = errorMessage(errorCode);
+
+      message.classList.add("show", "message-error");
+      message.classList.remove("message-success");
     });
 }
 
@@ -72,32 +73,21 @@ function errorMessage(Code) {
 
 function forgotPassword() {
   message = document.getElementById("message");
-  let email = emailEl.value; // Email field se email hasil karein
-
-  // Check karein ke user ne email dala hai ya nahi
+  let email = emailEl.value;
   if (email === "") {
-    message.textContent = "Please enter your email address first.";
+    message.innerHTML = "Please enter your email address first.";
     message.classList.add("show", "message-error");
-    return; // Function ko yahin rok dein
+    return;
   }
-
-  // Purana message saaf karein
-  message.textContent = "";
+  message.innerHTML = "";
   message.classList.remove("show", "message-error", "message-success");
-
-  // Firebase ko reset email bhejne ke liye bolein
-  console.log(email);
-
   fb.sendPasswordResetEmail(email)
     .then(() => {
-      // Jab email chali jaye
-      message.textContent =
-        "Password reset email sent! Please check your inbox.";
+      message.innerHTML = "Password reset email sent! Please check your inbox.";
       message.classList.add("show", "message-success");
     })
     .catch((error) => {
-      // Agar koi error aaye (maslan, email register na ho)
-      message.textContent = errorMessage(error.code); // Humara purana function istemal karein
+      message.innerHTML = errorMessage(error.code);
       message.classList.add("show", "message-error");
     });
 }
@@ -282,6 +272,7 @@ function deleteItem(deleteEl) {
     .delete()
     .then(() => {
       console.log("Document successfully deleted!");
+      deleteId = undefined;
     })
     .catch((error) => {
       console.error("Error removing document: ", error);
@@ -293,19 +284,99 @@ function tilteCase(tilteCase) {
 }
 function addToCart(cartEl) {
   let cartProducts = cartEl.parentNode.childNodes;
+  // console.log(cartProducts[1].innerText);
+
   console.log(cartEl.parentNode.childNodes);
   db.collection("Cart Products")
-      .add({
-        name: cartProducts[0].innerHTML,
-        price: cartProducts[1].innerHTML,
-        details: cartProducts[2].innerHTML,
-        location: cartProducts[3].innerHTML,
-        uid: fb.currentUser.uid,
-      })
-      .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
+    .add({
+      name: cartProducts[0].innerHTML,
+      price: cartProducts[1].innerText,
+      details: cartProducts[2].innerHTML,
+      location: cartProducts[3].innerHTML,
+      uid: fb.currentUser.uid,
+    })
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+}
+let cartListingEl = document.getElementById("cartListing");
+function getProductsCart() {
+  let uidData = JSON.parse(localStorage.getItem("uid"));
+  db.collection("Cart Products")
+    .where("uid", "==", uidData.uid)
+    .onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          let docData = change.doc.data();
+          docData.id = change.doc.id;
+          console.log("New city: ", docData);
+          makeListingcart(docData);
+        }
+        if (change.type === "modified") {
+          console.log("Modified city: ", change.doc.data());
+        }
+        if (change.type === "removed") {
+          console.log("Removed city: ", change.doc.data());
+        }
       });
+    });
+}
+function makeListingcart(doc) {
+  let div = document.createElement("div");
+  let p1 = document.createElement("p");
+  let p2 = document.createElement("p");
+  let p3 = document.createElement("p");
+  let p4 = document.createElement("p");
+
+  let cartBtn = document.createElement("button");
+
+  let pTextNode = document.createTextNode(doc.name);
+  let pTextNode1 = document.createTextNode(doc.price);
+  let pTextNode2 = document.createTextNode(doc.details);
+  let pTextNode3 = document.createTextNode(doc.location);
+
+  let cartTextNode = document.createTextNode("Remove Cart");
+
+  // div.setAttribute("id", doc.id);
+  p1.appendChild(pTextNode);
+  p2.appendChild(pTextNode1);
+  p3.appendChild(pTextNode2);
+  p4.appendChild(pTextNode3);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+  div.appendChild(p4);
+  div.setAttribute("id", doc.id);
+  div.classList.add("flex-center");
+
+  cartBtn.appendChild(cartTextNode);
+
+  cartBtn.classList.add("btn", "btn-cart");
+
+  cartBtn.setAttribute("onClick", "deleteCart(this)");
+
+  cartBtn.style.color = "black";
+
+  div.appendChild(cartBtn);
+
+  div.classList.add("product-card");
+  cartListingEl.appendChild(div);
+}
+function deleteCart(deleteEl) {
+  let deleteId = deleteEl.parentNode.id;
+  console.log(deleteId);
+  // console.log(deleteEl.parentNode.parentNode);
+  cartListingEl.removeChild(deleteEl.parentNode);
+  db.collection("Cart Products")
+    .doc(deleteId)
+    .delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+    })
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
 }

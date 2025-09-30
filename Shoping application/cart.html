@@ -4,11 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carts</title>
+    <link rel="stylesheet" href="cart.css" />
   </head>
-  <body>
+  <body onLoad="getProductsCart()">
+    <div class="page-header">
+      <a href="./home.html" class="nav-link">&larr; Back to Home</a>
+      <button class="signout-btn" onclick="signOut()">Sign Out</button>
+    </div>
+
+    <div class="container">
+      <h1>Your Shopping Cart</h1>
+      <div id="cartListing"></div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-auth-compat.js"></script>
-    <link rel="stylesheet" href="app.js" />
+    <script src="app.js"></script>
   </body>
 </html>

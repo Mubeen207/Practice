@@ -1,0 +1,169 @@
+/* --- Google Font & VIP Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #8A2BE2; /* Violet Blue */
+  --primary-glow: rgba(138, 43, 226, 0.3);
+  --primary-gradient: linear-gradient(45deg, #8A2BE2, #4B0082);
+  --danger-gradient: linear-gradient(45deg, #DC143C, #8B0000);
+  
+  --bg-dark: #121212; /* Dark Background */
+  --bg-card: #1E1E1E; /* Slightly Lighter Card BG */
+  
+  --text-primary: #EAEAEA;
+  --text-secondary: #A0A0A0;
+  
+  --border-color: #333333;
+  --radius-md: 10px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- General Body Styling --- */
+body {
+  background: var(--bg-dark);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+/* --- Cart Listing Grid --- */
+#cartListing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* --- Reusing Product Card Style --- */
+.product-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border: 2px solid var(--border-color);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.product-card-content {
+  padding: 20px;
+}
+
+.product-card-content p {
+  margin: 0 0 12px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.product-card-content p strong {
+  color: var(--text-primary);
+}
+
+.product-card-actions {
+  padding: 20px;
+  border-top: 1px solid var(--border-color);
+  text-align: right;
+}
+
+
+/* --- General Button Styling --- */
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  padding: 10px 20px;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.btn-delete {
+  background-image: var(--danger-gradient);
+}
+.flex-center {
+  /* --- VIP Card Jaisa Look --- */
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 30px; /* Andar space ke liye */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border: 2px solid var(--border-color);
+  transition: var(--transition);
+  
+  /* --- Content ko Center karne ke liye --- */
+  display: flex;
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  text-align: center; /* Text ko center karne ke liye */
+}
+
+.flex-center:hover {
+  /* --- Wahi Glowing Hover Effect --- */
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+/* Is code ko cart.css ke akhir mein add karein */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.signout-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  padding: 10px 20px;
+  background-image: var(--danger-gradient);
+  transition: var(--transition);
+}
+
+.signout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
