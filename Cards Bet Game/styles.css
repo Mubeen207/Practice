@@ -1,109 +1,195 @@
+/* --- Global Styles & Variables (Root Level) --- */
+:root {
+  /* Colors ko yahan define karne se manage karna aasan hota hai */
+  --primary-color: #007bff; /* Blue */
+  --secondary-color: #28a745; /* Green */
+  --danger-color: #dc3545; /* Red */
+  --neutral-color: #6c757d; /* Gray for bet buttons */
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --background-color: #f4f7f6;
+}
+
 * {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif; /* Modern font */
 }
 
 body {
-  background-color: blanchedalmond;
+  background-color: var(--background-color);
   display: flex;
+  justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
-  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-h1 {
+/* --- Main App Container --- */
+.main-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: blue;
-  font-size: 25px;
-  margin-bottom: 10px;
 }
-.double {
-  color: red;
+
+/* --- Typography (Headings, Text) --- */
+h1 {
+  font-size: 2rem;
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
 }
-#input {
-  height: 40px;
-  width: 250px;
-  border: 0.5px solid red;
-  border-radius: 9999px;
-  margin-bottom: 20px;
-  padding: 0px 20px;
-  font-weight: bold;
+
+h2 {
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
-.card {
+
+.highlight {
+  color: var(--danger-color);
+}
+
+/* --- Input & Buttons Section --- */
+.input-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 650px;
+  justify-content: center;
+  align-items: center; /* Vertically align items */
+  gap: 10px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Taake choti screen par wrap hojaye */
+}
+
+#input {
+  height: 45px;
+  width: 100%;
+  max-width: 250px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: border-color 0.3s ease;
+}
+
+#input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* --- General Button Styles --- */
+.btn,
+.add_dep_btn {
+  height: 45px;
+  padding: 0 20px; /* Width ki jagah padding behtar hai */
+  min-width: 100px; /* Minimum width set ki */
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.btn:hover,
+.add_dep_btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific Button Colors */
+.btn-deposit {
+  background-color: var(--primary-color);
+}
+
+.btn-reset {
+  background-color: var(--secondary-color);
+  margin-top: 1.5rem;
+}
+
+/* Dynamically added buttons ke liye style (aapke JS ke mutabiq) */
+.add_dep_btn {
+  background-color: var(--neutral-color);
+}
+
+/* --- Card Section --- */
+.card-container {
+  margin-bottom: 2rem;
 }
 
 .images {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Yeh zaroori hai mobile ke liye */
 }
 
 img {
-  width: 200px;
-  height: 300px;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 200px;
+  height: auto; /* Aspect ratio maintain karne ke liye */
+  border-radius: 12px;
   cursor: pointer;
+  border: 3px solid transparent;
   transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
 
 img:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px #0000004d;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.add_dep_btn {
-  /* display: flex; */
-  width: 120px;
-  height: 40px;
-  font-weight: bold;
-  color: blue;
-  background-color: white;
-  border-radius: 9999px;
-  border: 2px solid blue;
-  transition: all 0.3s ease;
-  margin-bottom: 15px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px #00000033;
+/* --- Status Section (Results & Chances) --- */
+.status-section #heading {
+  font-size: 1.75rem;
+  color: var(--dark-color);
+  min-height: 40px; /* Height di taake text change hone par layout na hilay */
 }
 
-.add_dep_btn:hover {
-  color: white;
-  background-color: blue;
-  border: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px #0000004d;
-}
-button {
-  width: 120px;
-  height: 40px;
-  font-weight: bold;
-  color: green;
-  background-color: white;
-  border-radius: 9999px;
-  border: 2px solid green;
-  transition: all 0.3s ease;
-  margin-bottom: 15px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px #00000033;
+.chance-text {
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  font-weight: 600;
 }
 
-button:hover {
-  color: white;
-  background-color: green;
-  border: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px #0000004d;
+/* --- Media Queries for Responsiveness --- */
+
+/* For Tablets */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  img {
+    max-width: 160px;
+  }
 }
-#button-add{
-      display: flex;
-      gap: 7px;
-}
-.chance {
-      color: blue;
-      font-weight: bold;
-      
+
+/* For Mobile Phones */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  .input-section {
+    flex-direction: column; /* Input aur button ko aik doosre ke neeche le aye */
+    align-items: center;
+  }
+  .images {
+    gap: 10px;
+  }
+  img {
+    max-width: 90px; /* Mobile par cards ka size chota kar diya */
+  }
 }
