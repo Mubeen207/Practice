@@ -7,6 +7,9 @@ let AmountEl = document.getElementById("amount");
 let Input = document.getElementById("input");
 let chanceEl = document.getElementById("chance");
 let resetCardEl = document.getElementById("resetCard");
+let tenPersent = 0;
+let fiftyPersent = 0;
+let hundredPersent = 0;
 let isFlipped = false;
 let result = 0;
 let inputNum = 0;
@@ -116,9 +119,13 @@ function Deposit(Element) {
     let fiveHundredBtn = document.createElement("button");
     let thousandBtn = document.createElement("button");
 
-    let hundredBtnTextNode = document.createTextNode("100");
-    let fiveHundredBtnTextNode = document.createTextNode("500");
-    let thousandBtnTextNode = document.createTextNode("1000");
+    tenPersent = (AmountEl.innerHTML * 10) / 100;
+    fiftyPersent = (AmountEl.innerHTML * 50) / 100;
+    hundredPersent = AmountEl.innerHTML;
+
+    let hundredBtnTextNode = document.createTextNode(tenPersent);
+    let fiveHundredBtnTextNode = document.createTextNode(fiftyPersent);
+    let thousandBtnTextNode = document.createTextNode(hundredPersent);
 
     hundredBtn.appendChild(hundredBtnTextNode);
     fiveHundredBtn.appendChild(fiveHundredBtnTextNode);
@@ -128,15 +135,22 @@ function Deposit(Element) {
     fiveHundredBtn.setAttribute("class", "add_dep_btn");
     thousandBtn.setAttribute("class", "add_dep_btn");
 
-    hundredBtn.setAttribute("onClick", "bitAmountBtn(100)");
-    fiveHundredBtn.setAttribute("onClick", "bitAmountBtn(500)");
-    thousandBtn.setAttribute("onClick", "bitAmountBtn(1000)");
+    hundredBtn.setAttribute("onClick", "bitAmountBtn(" + tenPersent + ")");
+    fiveHundredBtn.setAttribute(
+      "onClick",
+      "bitAmountBtn(" + fiftyPersent + ")"
+    );
+    thousandBtn.setAttribute("onClick", "bitAmountBtn(" + hundredPersent + ")");
 
     // hundredBtn.setAttribute("id", "hello");
 
     buttonAddEl.appendChild(hundredBtn);
     buttonAddEl.appendChild(fiveHundredBtn);
     buttonAddEl.appendChild(thousandBtn);
+
+    tenPersent = 0;
+    fiftyPersent = 0;
+    hundredPersent = 0;
   } else {
     h1.innerHTML = "Invalid Value Please Enter Number Only!";
     h1.style.color = "red";
