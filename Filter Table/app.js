@@ -37,6 +37,7 @@ function myFunction() {
     addSetionTr.id = "notFoundRow";
     addSetionTd1.colSpan = 2;
     addSetionTd1.style.textAlign = "center";
+    addSetionTd1.style.background = "red";
     addSetionTd1.innerHTML = "Not Found";
     addSetionTr.appendChild(addSetionTd1);
     myTable.appendChild(addSetionTr);
