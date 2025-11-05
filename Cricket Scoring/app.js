@@ -127,11 +127,9 @@ function cheak() {
   score = Number(document.getElementById("score").value);
   currentOvers = Number(document.getElementById("overs").value);
 
-  console.log(score);
-  console.log(currentOvers);
-
   if (score >= 0 && score !== 0) {
     scoreingEl.innerHTML = score;
+    localStorage.setItem("Score", score);
     cheakBtnFlag = true;
   } else {
     scoreingEl.innerHTML = "Your Score is Less Then 0";
@@ -153,9 +151,7 @@ function cheak() {
     cheakBtn.setAttribute("onClick", "finish()");
   }
 }
-function finish(){
-    console.log("Hello");
-    
+function finish() {
   removing();
   let oneCreate = document.createElement("button");
   let twoCreate = document.createElement("button");
@@ -165,14 +161,20 @@ function finish(){
   let wideCreate = document.createElement("button");
   let noBallCreate = document.createElement("button");
   let resultCreate = document.createElement("h3");
+  let oneLessCreate = document.createElement("button");
+  let fiveLessCreate = document.createElement("button");
+  let outCreate = document.createElement("button");
 
   let oneCreateText = document.createTextNode("1");
   let twoCreateText = document.createTextNode("2");
   let threeCreateText = document.createTextNode("3");
   let fourCreateText = document.createTextNode("4");
   let sixCreateText = document.createTextNode("6");
+  let oneLessCreateText = document.createTextNode("-1");
+  let fiveLessCreateText = document.createTextNode("-5");
   let wideCreateText = document.createTextNode("Wide");
   let noBallCreateText = document.createTextNode("No Ball");
+  let outCreateText = document.createTextNode("OUT");
 
   oneCreate.setAttribute("onClick", "update(1)");
   twoCreate.setAttribute("onClick", "update(2)");
@@ -181,6 +183,9 @@ function finish(){
   sixCreate.setAttribute("onClick", "update(6)");
   wideCreate.setAttribute("onClick", "update(1)");
   noBallCreate.setAttribute("onClick", "update(1)");
+  oneLessCreate.setAttribute("onClick", "update(-1)");
+  fiveLessCreate.setAttribute("onClick", "update(-5)");
+  outCreate.setAttribute("onClick", "update('out')");
   resultCreate.setAttribute("id", "show");
 
   oneCreate.appendChild(oneCreateText);
@@ -190,6 +195,9 @@ function finish(){
   sixCreate.appendChild(sixCreateText);
   wideCreate.appendChild(wideCreateText);
   noBallCreate.appendChild(noBallCreateText);
+  oneLessCreate.appendChild(oneLessCreateText);
+  fiveLessCreate.appendChild(fiveLessCreateText);
+  outCreate.appendChild(outCreateText);
 
   selectionEl.appendChild(oneCreate);
   selectionEl.appendChild(twoCreate);
@@ -198,12 +206,13 @@ function finish(){
   selectionEl.appendChild(sixCreate);
   selectionEl.appendChild(wideCreate);
   selectionEl.appendChild(noBallCreate);
+  selectionEl.appendChild(outCreate);
+  selectionEl.appendChild(oneLessCreate);
+  selectionEl.appendChild(fiveLessCreate);
   selectionEl.appendChild(resultCreate);
-
 }
 function removing() {
   do {
-    console.log(selectionEl.childNodes);
     selectionEl.removeChild(selectionEl.childNodes[0]);
     if (selectionEl.childNodes.length === 0) {
       break;
@@ -211,4 +220,13 @@ function removing() {
   } while (selectionEl.childNodes[0] !== "");
 }
 
-function update() {}
+function update(num) {
+  let result = document.getElementById("show");
+  let score = "";
+  if(score === ""){
+
+    score = Number(localStorage.getItem("Score"));
+  }
+
+  result.innerHTML =  + num;
+}
