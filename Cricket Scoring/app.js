@@ -117,6 +117,7 @@ function bolling() {
   selectionEl.appendChild(oversEl);
   selectionEl.appendChild(cheakBtn);
   selectionEl.appendChild(scoreingEl);
+  selectionEl.appendChild(oversCountEl);
 }
 
 function cheak() {
@@ -148,11 +149,59 @@ function cheak() {
   }
   if (cheakBtnFlag) {
     let cheakBtn = selectionEl.childNodes[2];
-    cheakBtn.innerHTML = "Start";
-    cheakBtn.setAttribute("onClick", "start()");
+    cheakBtn.innerHTML = "Clear";
+    cheakBtn.setAttribute("onClick", "finish()");
   }
 }
-function start() {
+function finish(){
+    console.log("Hello");
+    
+  removing();
+  let oneCreate = document.createElement("button");
+  let twoCreate = document.createElement("button");
+  let threeCreate = document.createElement("button");
+  let fourCreate = document.createElement("button");
+  let sixCreate = document.createElement("button");
+  let wideCreate = document.createElement("button");
+  let noBallCreate = document.createElement("button");
+  let resultCreate = document.createElement("h3");
+
+  let oneCreateText = document.createTextNode("1");
+  let twoCreateText = document.createTextNode("2");
+  let threeCreateText = document.createTextNode("3");
+  let fourCreateText = document.createTextNode("4");
+  let sixCreateText = document.createTextNode("6");
+  let wideCreateText = document.createTextNode("Wide");
+  let noBallCreateText = document.createTextNode("No Ball");
+
+  oneCreate.setAttribute("onClick", "update(1)");
+  twoCreate.setAttribute("onClick", "update(2)");
+  threeCreate.setAttribute("onClick", "update(3)");
+  fourCreate.setAttribute("onClick", "update(4)");
+  sixCreate.setAttribute("onClick", "update(6)");
+  wideCreate.setAttribute("onClick", "update(1)");
+  noBallCreate.setAttribute("onClick", "update(1)");
+  resultCreate.setAttribute("id", "show");
+
+  oneCreate.appendChild(oneCreateText);
+  twoCreate.appendChild(twoCreateText);
+  threeCreate.appendChild(threeCreateText);
+  fourCreate.appendChild(fourCreateText);
+  sixCreate.appendChild(sixCreateText);
+  wideCreate.appendChild(wideCreateText);
+  noBallCreate.appendChild(noBallCreateText);
+
+  selectionEl.appendChild(oneCreate);
+  selectionEl.appendChild(twoCreate);
+  selectionEl.appendChild(threeCreate);
+  selectionEl.appendChild(fourCreate);
+  selectionEl.appendChild(sixCreate);
+  selectionEl.appendChild(wideCreate);
+  selectionEl.appendChild(noBallCreate);
+  selectionEl.appendChild(resultCreate);
+
+}
+function removing() {
   do {
     console.log(selectionEl.childNodes);
     selectionEl.removeChild(selectionEl.childNodes[0]);
@@ -161,3 +210,5 @@ function start() {
     }
   } while (selectionEl.childNodes[0] !== "");
 }
+
+function update() {}
