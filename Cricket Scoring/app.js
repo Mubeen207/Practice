@@ -1,4 +1,8 @@
 let selectionEl = document.getElementById("selection");
+let overs = 0;
+let currentOvers = 0;
+let score = 0;
+let cheakBtnFlag = false;
 function generate() {
   let t20Btn = document.createElement("button");
   let odiBtn = document.createElement("button");
@@ -17,31 +21,48 @@ function generate() {
 function t20() {
   selectionEl.removeChild(selectionEl.childNodes[0]);
   selectionEl.removeChild(selectionEl.childNodes[0]);
+  let battingBtn = document.createElement("button");
+  let bollingBtn = document.createElement("button");
+  let battingBtnTextNods = document.createTextNode("Batting");
+  let bollingBtnTextNods = document.createTextNode("Bolling");
 
-  let scoreEl = document.createElement("input");
-  let oversEl = document.createElement("input");
-  let cheakBtn = document.createElement("button");
+  battingBtn.appendChild(battingBtnTextNods);
+  bollingBtn.appendChild(bollingBtnTextNods);
 
-  let cheakBtnTextNods = document.createTextNode("Cheak");
+  battingBtn.setAttribute("onClick", "batting()");
+  bollingBtn.setAttribute("onClick", "bolling()");
 
-  scoreEl.setAttribute("placeholder", "Enter Current Score");
-  scoreEl.setAttribute("type", "number");
-  scoreEl.setAttribute("id", "score");
+  selectionEl.appendChild(battingBtn);
+  selectionEl.appendChild(bollingBtn);
 
-  oversEl.setAttribute("placeholder", "Enter Remaining Overs");
-  oversEl.setAttribute("type", "number");
-  oversEl.setAttribute("id", "overs");
-
-  cheakBtn.appendChild(cheakBtnTextNods);
-  cheakBtn.setAttribute("onClick", "cheak()");
-
-  selectionEl.appendChild(scoreEl);
-  selectionEl.appendChild(oversEl);
-  selectionEl.appendChild(cheakBtn);
+  overs = 20;
 }
 function odi() {
   selectionEl.removeChild(selectionEl.childNodes[0]);
   selectionEl.removeChild(selectionEl.childNodes[0]);
+
+  let battingBtn = document.createElement("button");
+  let bollingBtn = document.createElement("button");
+  let battingBtnTextNods = document.createTextNode("Batting");
+  let bollingBtnTextNods = document.createTextNode("Bolling");
+
+  battingBtn.appendChild(battingBtnTextNods);
+  bollingBtn.appendChild(bollingBtnTextNods);
+
+  battingBtn.setAttribute("onClick", "batting()");
+  bollingBtn.setAttribute("onClick", "bolling()");
+
+  selectionEl.appendChild(battingBtn);
+  selectionEl.appendChild(bollingBtn);
+  overs = 50;
+}
+
+function batting() {
+  selectionEl.removeChild(selectionEl.childNodes[0]);
+  selectionEl.removeChild(selectionEl.childNodes[0]);
+
+  let scoreingEl = document.createElement("h3");
+  let oversCountEl = document.createElement("h3");
   let scoreEl = document.createElement("input");
   let oversEl = document.createElement("input");
   let cheakBtn = document.createElement("button");
@@ -59,10 +80,84 @@ function odi() {
   cheakBtn.appendChild(cheakBtnTextNods);
   cheakBtn.setAttribute("onClick", "cheak()");
 
+  scoreingEl.setAttribute("id", "scoreing");
+  oversCountEl.setAttribute("id", "oversCount");
+
   selectionEl.appendChild(scoreEl);
   selectionEl.appendChild(oversEl);
   selectionEl.appendChild(cheakBtn);
+  selectionEl.appendChild(scoreingEl);
+  selectionEl.appendChild(oversCountEl);
 }
+function bolling() {
+  selectionEl.removeChild(selectionEl.childNodes[0]);
+  selectionEl.removeChild(selectionEl.childNodes[0]);
+  let scoreingEl = document.createElement("h3");
+  let oversCountEl = document.createElement("h3");
+  let scoreEl = document.createElement("input");
+  let oversEl = document.createElement("input");
+  let cheakBtn = document.createElement("button");
+
+  let cheakBtnTextNods = document.createTextNode("Cheak");
+
+  scoreEl.setAttribute("placeholder", "Enter Current Score");
+  scoreEl.setAttribute("type", "number");
+  scoreEl.setAttribute("id", "score");
+
+  oversEl.setAttribute("placeholder", "Enter Remaining Overs");
+  oversEl.setAttribute("type", "number");
+  oversEl.setAttribute("id", "overs");
+
+  cheakBtn.appendChild(cheakBtnTextNods);
+  cheakBtn.setAttribute("onClick", "cheak()");
+
+  scoreingEl.setAttribute("id", "scoreing");
+  oversCountEl.setAttribute("id", "oversCount");
+  selectionEl.appendChild(scoreEl);
+  selectionEl.appendChild(oversEl);
+  selectionEl.appendChild(cheakBtn);
+  selectionEl.appendChild(scoreingEl);
+}
+
 function cheak() {
-      
+  let scoreingEl = document.getElementById("scoreing");
+  let oversCountEl = document.getElementById("oversCount");
+
+  score = Number(document.getElementById("score").value);
+  currentOvers = Number(document.getElementById("overs").value);
+
+  console.log(score);
+  console.log(currentOvers);
+
+  if (score >= 0 && score !== 0) {
+    scoreingEl.innerHTML = score;
+    cheakBtnFlag = true;
+  } else {
+    scoreingEl.innerHTML = "Your Score is Less Then 0";
+    cheakBtnFlag = false;
+  }
+  if (currentOvers >= 0 && currentOvers <= overs && currentOvers !== 0) {
+    oversCountEl.innerHTML = currentOvers;
+    cheakBtnFlag = true;
+  } else if (currentOvers >= overs) {
+    oversCountEl.innerHTML = `Your overs is Greater Then ${overs}`;
+    cheakBtnFlag = false;
+  } else {
+    oversCountEl.innerHTML = "Your overs is Less Then 0";
+    cheakBtnFlag = false;
+  }
+  if (cheakBtnFlag) {
+    let cheakBtn = selectionEl.childNodes[2];
+    cheakBtn.innerHTML = "Start";
+    cheakBtn.setAttribute("onClick", "start()");
+  }
+}
+function start() {
+  do {
+    console.log(selectionEl.childNodes);
+    selectionEl.removeChild(selectionEl.childNodes[0]);
+    if (selectionEl.childNodes.length === 0) {
+      break;
+    }
+  } while (selectionEl.childNodes[0] !== "");
 }
