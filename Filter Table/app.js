@@ -103,3 +103,9 @@ function recheak(start) {
     }
   }
 }
+const x = 10;
+
+x = 20;
+
+
+
