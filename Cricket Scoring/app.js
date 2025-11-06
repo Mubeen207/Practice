@@ -1,8 +1,11 @@
 let selectionEl = document.getElementById("selection");
 let overs = 0;
+let oversCounnt = 0;
 let currentOvers = 0;
 let score = 0;
 let cheakBtnFlag = false;
+let out = 0;
+let target = 0;
 function generate() {
   let t20Btn = document.createElement("button");
   let odiBtn = document.createElement("button");
@@ -127,15 +130,14 @@ function cheak() {
   score = Number(document.getElementById("score").value);
   currentOvers = Number(document.getElementById("overs").value);
 
-  if (score >= 0 && score !== 0) {
+  if (score >= 0) {
     scoreingEl.innerHTML = score;
-    localStorage.setItem("Score", score);
     cheakBtnFlag = true;
   } else {
     scoreingEl.innerHTML = "Your Score is Less Then 0";
     cheakBtnFlag = false;
   }
-  if (currentOvers >= 0 && currentOvers <= overs && currentOvers !== 0) {
+  if (currentOvers >= 0 && currentOvers <= overs) {
     oversCountEl.innerHTML = currentOvers;
     cheakBtnFlag = true;
   } else if (currentOvers >= overs) {
@@ -164,6 +166,9 @@ function finish() {
   let oneLessCreate = document.createElement("button");
   let fiveLessCreate = document.createElement("button");
   let outCreate = document.createElement("button");
+  let targetCreate = document.createElement("input");
+  let targetAddBtnCreate = document.createElement("button");
+  let targetShowCreate = document.createElement("h3");
 
   let oneCreateText = document.createTextNode("1");
   let twoCreateText = document.createTextNode("2");
@@ -175,18 +180,22 @@ function finish() {
   let wideCreateText = document.createTextNode("Wide");
   let noBallCreateText = document.createTextNode("No Ball");
   let outCreateText = document.createTextNode("OUT");
+  let targetAddBtnCreateText = document.createTextNode("Target");
 
   oneCreate.setAttribute("onClick", "update(1)");
   twoCreate.setAttribute("onClick", "update(2)");
   threeCreate.setAttribute("onClick", "update(3)");
   fourCreate.setAttribute("onClick", "update(4)");
   sixCreate.setAttribute("onClick", "update(6)");
-  wideCreate.setAttribute("onClick", "update(1)");
-  noBallCreate.setAttribute("onClick", "update(1)");
+  wideCreate.setAttribute("onClick", "update('wide')");
+  noBallCreate.setAttribute("onClick", "update('noball')");
   oneLessCreate.setAttribute("onClick", "update(-1)");
   fiveLessCreate.setAttribute("onClick", "update(-5)");
   outCreate.setAttribute("onClick", "update('out')");
   resultCreate.setAttribute("id", "show");
+  targetCreate.setAttribute("id", "target");
+  targetAddBtnCreate.setAttribute("onClick", "add()");
+  targetShowCreate.setAttribute("id", "targetShow");
 
   oneCreate.appendChild(oneCreateText);
   twoCreate.appendChild(twoCreateText);
@@ -198,6 +207,7 @@ function finish() {
   oneLessCreate.appendChild(oneLessCreateText);
   fiveLessCreate.appendChild(fiveLessCreateText);
   outCreate.appendChild(outCreateText);
+  targetAddBtnCreate.appendChild(targetAddBtnCreateText);
 
   selectionEl.appendChild(oneCreate);
   selectionEl.appendChild(twoCreate);
@@ -210,6 +220,9 @@ function finish() {
   selectionEl.appendChild(oneLessCreate);
   selectionEl.appendChild(fiveLessCreate);
   selectionEl.appendChild(resultCreate);
+  selectionEl.appendChild(targetCreate);
+  selectionEl.appendChild(targetAddBtnCreate);
+  selectionEl.appendChild(targetShowCreate);
 }
 function removing() {
   do {
@@ -222,11 +235,43 @@ function removing() {
 
 function update(num) {
   let result = document.getElementById("show");
-  let score = "";
-  if(score === ""){
-
-    score = Number(localStorage.getItem("Score"));
+  let targetShowEl = document.getElementById("targetShow");
+  if (out < 10) {
+    if (num == -1) {
+      score--;
+      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+    } else if (num == -5) {
+      score -= 5;
+      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+    } else if (num == "wide") {
+      score++;
+      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+    } else if (num == "noball") {
+      score++;
+      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+    } else if (num == "out") {
+      out++;
+      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+    } else {
+      if (currentOvers < 6) {
+        currentOvers++;
+        score += num;
+      } else {
+        if (num !== "wide") {
+          oversCounnt++;
+          currentOvers = 1;
+          score += num;
+        }
+      }
+      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+      targetShowEl.innerHTML = `${target - score} need of ${
+        (overs * 6) - (((oversCounnt * 6) + currentOvers) - 1)
+      } Balls`;
+    }
+  } else {
+    return;
   }
-
-  result.innerHTML =  + num;
+}
+function add() {
+  target = document.getElementById("target").value;
 }
