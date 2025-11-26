@@ -8,44 +8,26 @@ let out = 0;
 let target = 0;
 function generate() {
   let btns = `
-  <button onClick="t20()">T20</button>
-<button onClick="odi()">ODI</button>
+  <button onClick="select('t20')">T20</button>
+<button onClick="select('odi')">ODI</button>
   `;
   selectionEl.innerHTML = btns;
 }
-function t20() {
+function select(el) {
   selectionEl.removeChild(selectionEl.childNodes[1]);
   selectionEl.removeChild(selectionEl.childNodes[2]);
   let btns = `
-  <button onClick="batting()">Batting</button>
-  <button onClick="bolling()">Bolling</button>
+   <button onClick="scoring()">Batting</button>
+  <button onClick="scoring()">Bolling</button>
   `;
   selectionEl.innerHTML = btns;
-  overs = 20;
+  if (el === "odi") {
+    overs = 50;
+  } else {
+    overs = 20;
+  }
 }
-function odi() {
-  selectionEl.removeChild(selectionEl.childNodes[1]);
-  selectionEl.removeChild(selectionEl.childNodes[2]);
-  let btns = `
-  <button onClick="batting()">Batting</button>
-  <button onClick="bolling()">Bolling</button>
-  `;
-  selectionEl.innerHTML = btns;
-  overs = 50;
-}
-
-function batting() {
-  selectionEl.removeChild(selectionEl.childNodes[1]);
-  selectionEl.removeChild(selectionEl.childNodes[2]);
-  let items = `
- <input type="number" id="score" placeholder="Enter Current Score" />
-<input type="number" id="overs" placeholder="Enter Remaining Overs" />
-<button onclick="cheak()">Cheak</button>
-<h3 id="scoreing"></h3>
-<h3 id="oversCount"></h3>`;
-  selectionEl.innerHTML = items;
-}
-function bolling() {
+function scoring() {
   selectionEl.removeChild(selectionEl.childNodes[1]);
   selectionEl.removeChild(selectionEl.childNodes[2]);
   let items = `
