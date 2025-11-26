@@ -7,120 +7,54 @@ let cheakBtnFlag = false;
 let out = 0;
 let target = 0;
 function generate() {
-  let t20Btn = document.createElement("button");
-  let odiBtn = document.createElement("button");
-  let t20BtnTextNods = document.createTextNode("T20");
-  let odiBtnTextNods = document.createTextNode("ODI");
-
-  t20Btn.appendChild(t20BtnTextNods);
-  odiBtn.appendChild(odiBtnTextNods);
-
-  t20Btn.setAttribute("onClick", "t20()");
-  odiBtn.setAttribute("onClick", "odi()");
-
-  selectionEl.appendChild(t20Btn);
-  selectionEl.appendChild(odiBtn);
+  let btns = `
+  <button onClick="t20()">T20</button>
+<button onClick="odi()">ODI</button>
+  `;
+  selectionEl.innerHTML = btns;
 }
 function t20() {
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-  let battingBtn = document.createElement("button");
-  let bollingBtn = document.createElement("button");
-  let battingBtnTextNods = document.createTextNode("Batting");
-  let bollingBtnTextNods = document.createTextNode("Bolling");
-
-  battingBtn.appendChild(battingBtnTextNods);
-  bollingBtn.appendChild(bollingBtnTextNods);
-
-  battingBtn.setAttribute("onClick", "batting()");
-  bollingBtn.setAttribute("onClick", "bolling()");
-
-  selectionEl.appendChild(battingBtn);
-  selectionEl.appendChild(bollingBtn);
-
+  selectionEl.removeChild(selectionEl.childNodes[1]);
+  selectionEl.removeChild(selectionEl.childNodes[2]);
+  let btns = `
+  <button onClick="batting()">Batting</button>
+  <button onClick="bolling()">Bolling</button>
+  `;
+  selectionEl.innerHTML = btns;
   overs = 20;
 }
 function odi() {
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-
-  let battingBtn = document.createElement("button");
-  let bollingBtn = document.createElement("button");
-  let battingBtnTextNods = document.createTextNode("Batting");
-  let bollingBtnTextNods = document.createTextNode("Bolling");
-
-  battingBtn.appendChild(battingBtnTextNods);
-  bollingBtn.appendChild(bollingBtnTextNods);
-
-  battingBtn.setAttribute("onClick", "batting()");
-  bollingBtn.setAttribute("onClick", "bolling()");
-
-  selectionEl.appendChild(battingBtn);
-  selectionEl.appendChild(bollingBtn);
+  selectionEl.removeChild(selectionEl.childNodes[1]);
+  selectionEl.removeChild(selectionEl.childNodes[2]);
+  let btns = `
+  <button onClick="batting()">Batting</button>
+  <button onClick="bolling()">Bolling</button>
+  `;
+  selectionEl.innerHTML = btns;
   overs = 50;
 }
 
 function batting() {
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-
-  let scoreingEl = document.createElement("h3");
-  let oversCountEl = document.createElement("h3");
-  let scoreEl = document.createElement("input");
-  let oversEl = document.createElement("input");
-  let cheakBtn = document.createElement("button");
-
-  let cheakBtnTextNods = document.createTextNode("Cheak");
-
-  scoreEl.setAttribute("placeholder", "Enter Current Score");
-  scoreEl.setAttribute("type", "number");
-  scoreEl.setAttribute("id", "score");
-
-  oversEl.setAttribute("placeholder", "Enter Remaining Overs");
-  oversEl.setAttribute("type", "number");
-  oversEl.setAttribute("id", "overs");
-
-  cheakBtn.appendChild(cheakBtnTextNods);
-  cheakBtn.setAttribute("onClick", "cheak()");
-
-  scoreingEl.setAttribute("id", "scoreing");
-  oversCountEl.setAttribute("id", "oversCount");
-
-  selectionEl.appendChild(scoreEl);
-  selectionEl.appendChild(oversEl);
-  selectionEl.appendChild(cheakBtn);
-  selectionEl.appendChild(scoreingEl);
-  selectionEl.appendChild(oversCountEl);
+  selectionEl.removeChild(selectionEl.childNodes[1]);
+  selectionEl.removeChild(selectionEl.childNodes[2]);
+  let items = `
+ <input type="number" id="score" placeholder="Enter Current Score" />
+<input type="number" id="overs" placeholder="Enter Remaining Overs" />
+<button onclick="cheak()">Cheak</button>
+<h3 id="scoreing"></h3>
+<h3 id="oversCount"></h3>`;
+  selectionEl.innerHTML = items;
 }
 function bolling() {
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-  selectionEl.removeChild(selectionEl.childNodes[0]);
-  let scoreingEl = document.createElement("h3");
-  let oversCountEl = document.createElement("h3");
-  let scoreEl = document.createElement("input");
-  let oversEl = document.createElement("input");
-  let cheakBtn = document.createElement("button");
-
-  let cheakBtnTextNods = document.createTextNode("Cheak");
-
-  scoreEl.setAttribute("placeholder", "Enter Current Score");
-  scoreEl.setAttribute("type", "number");
-  scoreEl.setAttribute("id", "score");
-
-  oversEl.setAttribute("placeholder", "Enter Remaining Overs");
-  oversEl.setAttribute("type", "number");
-  oversEl.setAttribute("id", "overs");
-
-  cheakBtn.appendChild(cheakBtnTextNods);
-  cheakBtn.setAttribute("onClick", "cheak()");
-
-  scoreingEl.setAttribute("id", "scoreing");
-  oversCountEl.setAttribute("id", "oversCount");
-  selectionEl.appendChild(scoreEl);
-  selectionEl.appendChild(oversEl);
-  selectionEl.appendChild(cheakBtn);
-  selectionEl.appendChild(scoreingEl);
-  selectionEl.appendChild(oversCountEl);
+  selectionEl.removeChild(selectionEl.childNodes[1]);
+  selectionEl.removeChild(selectionEl.childNodes[2]);
+  let items = `
+ <input type="number" id="score" placeholder="Enter Current Score" />
+<input type="number" id="overs" placeholder="Enter Remaining Overs" />
+<button onclick="cheak()">Cheak</button>
+<h3 id="scoreing"></h3>
+<h3 id="oversCount"></h3>`;
+  selectionEl.innerHTML = items;
 }
 
 function cheak() {
@@ -148,81 +82,30 @@ function cheak() {
     cheakBtnFlag = false;
   }
   if (cheakBtnFlag) {
-    let cheakBtn = selectionEl.childNodes[2];
+    let cheakBtn = selectionEl.childNodes[5];
     cheakBtn.innerHTML = "Clear";
     cheakBtn.setAttribute("onClick", "finish()");
   }
 }
 function finish() {
   removing();
-  let oneCreate = document.createElement("button");
-  let twoCreate = document.createElement("button");
-  let threeCreate = document.createElement("button");
-  let fourCreate = document.createElement("button");
-  let sixCreate = document.createElement("button");
-  let wideCreate = document.createElement("button");
-  let noBallCreate = document.createElement("button");
-  let resultCreate = document.createElement("h3");
-  let oneLessCreate = document.createElement("button");
-  let fiveLessCreate = document.createElement("button");
-  let outCreate = document.createElement("button");
-  let targetCreate = document.createElement("input");
-  let targetAddBtnCreate = document.createElement("button");
-  let targetShowCreate = document.createElement("h3");
-
-  let oneCreateText = document.createTextNode("1");
-  let twoCreateText = document.createTextNode("2");
-  let threeCreateText = document.createTextNode("3");
-  let fourCreateText = document.createTextNode("4");
-  let sixCreateText = document.createTextNode("6");
-  let oneLessCreateText = document.createTextNode("-1");
-  let fiveLessCreateText = document.createTextNode("-5");
-  let wideCreateText = document.createTextNode("Wide");
-  let noBallCreateText = document.createTextNode("No Ball");
-  let outCreateText = document.createTextNode("OUT");
-  let targetAddBtnCreateText = document.createTextNode("Target");
-
-  oneCreate.setAttribute("onClick", "update(1)");
-  twoCreate.setAttribute("onClick", "update(2)");
-  threeCreate.setAttribute("onClick", "update(3)");
-  fourCreate.setAttribute("onClick", "update(4)");
-  sixCreate.setAttribute("onClick", "update(6)");
-  wideCreate.setAttribute("onClick", "update('wide')");
-  noBallCreate.setAttribute("onClick", "update('noball')");
-  oneLessCreate.setAttribute("onClick", "update(-1)");
-  fiveLessCreate.setAttribute("onClick", "update(-5)");
-  outCreate.setAttribute("onClick", "update('out')");
-  resultCreate.setAttribute("id", "show");
-  targetCreate.setAttribute("id", "target");
-  targetAddBtnCreate.setAttribute("onClick", "add()");
-  targetShowCreate.setAttribute("id", "targetShow");
-
-  oneCreate.appendChild(oneCreateText);
-  twoCreate.appendChild(twoCreateText);
-  threeCreate.appendChild(threeCreateText);
-  fourCreate.appendChild(fourCreateText);
-  sixCreate.appendChild(sixCreateText);
-  wideCreate.appendChild(wideCreateText);
-  noBallCreate.appendChild(noBallCreateText);
-  oneLessCreate.appendChild(oneLessCreateText);
-  fiveLessCreate.appendChild(fiveLessCreateText);
-  outCreate.appendChild(outCreateText);
-  targetAddBtnCreate.appendChild(targetAddBtnCreateText);
-
-  selectionEl.appendChild(oneCreate);
-  selectionEl.appendChild(twoCreate);
-  selectionEl.appendChild(threeCreate);
-  selectionEl.appendChild(fourCreate);
-  selectionEl.appendChild(sixCreate);
-  selectionEl.appendChild(wideCreate);
-  selectionEl.appendChild(noBallCreate);
-  selectionEl.appendChild(outCreate);
-  selectionEl.appendChild(oneLessCreate);
-  selectionEl.appendChild(fiveLessCreate);
-  selectionEl.appendChild(resultCreate);
-  selectionEl.appendChild(targetCreate);
-  selectionEl.appendChild(targetAddBtnCreate);
-  selectionEl.appendChild(targetShowCreate);
+  let items = `
+  <button onclick="update(1)">1</button>
+<button onclick="update(2)">2</button>
+<button onclick="update(3)">3</button>
+<button onclick="update(4)">4</button>
+<button onclick="update(6)">6</button>
+<button onclick="update('wide')">Wide</button>
+<button onclick="update('noball')">No Ball</button>
+<button onclick="update('out')">OUT</button>
+<button onclick="update('-1')">-1</button>
+<button onclick="update('-5')">-5</button>
+<h3 id="show"></h3>
+<input type="text" id="target">
+<button onclick="add()">Target</button>
+<h3 id="targetShow"></h3>
+  `;
+  selectionEl.innerHTML = items;
 }
 function removing() {
   do {
@@ -265,7 +148,7 @@ function update(num) {
       }
       result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
       targetShowEl.innerHTML = `${target - score} need of ${
-        (overs * 6) - (((oversCounnt * 6) + currentOvers) - 1)
+        overs * 6 - (oversCounnt * 6 + currentOvers - 1)
       } Balls`;
     }
   } else {
