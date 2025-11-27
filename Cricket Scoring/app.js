@@ -1,12 +1,14 @@
-let oversCounnt = 0;
-let currentOvers = 0;
-let score = 0;
 let selectionEl = document.getElementById("selection");
-let plus = 0;
-let targetEl = 0;
 let flag = true;
 let balls = "";
-let ball , over = 0;
+let ball,
+  over,
+  oversCounnt,
+  currentOvers,
+  score,
+  plus,
+  targetEl = 0;
+
 function generate() {
   let btns = `
   <button onClick="select('t20')">T20</button>
@@ -14,6 +16,7 @@ function generate() {
   `;
   selectionEl.innerHTML = btns;
 }
+
 function select(el) {
   let items = `
  <input type="number" id="score" placeholder="Enter Current Score" />
@@ -54,14 +57,14 @@ function cheak() {
   score = Number(document.getElementById("score").value);
   over = Number(document.getElementById("over").value);
   ball = Number(document.getElementById("ball").value);
-currentOvers = Number(`${over}.${ball}`);
+  currentOvers = Number(`${over}.${ball}`);
 
   if (score >= 0) {
     if (currentOvers >= 0 && currentOvers <= overs) {
       // setTimeout(function(){
-      if(currentOvers >= 0){
-          oversCounnt = over;
-          currentOvers = ball;
+      if (currentOvers >= 0) {
+        oversCounnt = over;
+        currentOvers = ball;
       }
       finish();
       // }, 2000)
@@ -76,6 +79,7 @@ currentOvers = Number(`${over}.${ball}`);
     scoreingPrint.innerHTML = "Your Score is Less Then 0";
   }
 }
+
 function finish() {
   let items = `
   <button onclick="update(0)">Dot</button>
@@ -104,51 +108,62 @@ function update(num) {
   let result = document.getElementById("show");
   let runRateShowEl = document.getElementById("runRateShow");
   let needEl = document.getElementById("need");
-
-  if (out < 10) {
-    if (num == -1) {
-      score--;
-      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
-    } else if (num == -5) {
-      score -= 5;
-      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
-    } else if (num == "wide") {
-      score++;
-      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
-    } else if (num == "noball") {
-      score++;
-      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
-    } else if (num == "out") {
-      out++;
-      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+let condition = Number(`${oversCounnt}.${currentOvers+1}`);
+    if(condition > overs || score > targetEl){
+return;
     } else {
-      if (currentOvers < 5) {
-        currentOvers++;
-        score += num;
+
+    
+
+  {
+    if (out < 10) {
+      if (num == -1) {
+        score--;
+        result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+      } else if (num == -5) {
+        score -= 5;
+        result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+      } else if (num == "wide") {
+        score++;
+        result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+      } else if (num == "noball") {
+        score++;
+        result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+      } else if (num == "out") {
+        out++;
+        result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
       } else {
-        oversCounnt++;
-        currentOvers = 0;
-        score += num;
-      }
-      result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
-      plus = Number(`${oversCounnt}.${currentOvers}`);
-      if (plus <= overs) {
-        if (flag) {
-          runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)}`;
+        if (currentOvers < 5) {
+          currentOvers++;
+          score += num;
         } else {
-          runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)} RRR ${(
-            (targetEl - score) /
-            (overs - plus)
-          ).toFixed(2)}`;
-          balls = overs * 6 - (oversCounnt * 6 + currentOvers);
-          needEl.innerHTML = `${targetEl - score} Need Off ${balls} Balls`;
+          oversCounnt++;
+          currentOvers = 0;
+          score += num;
+        }
+        result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
+        plus = Number(`${oversCounnt}.${currentOvers}`);
+        if (plus <= overs) {
+          if (flag) {
+            runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)}`;
+          } else {
+            runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)} RRR ${(
+              (targetEl - score) /
+              (overs - plus)
+            ).toFixed(2)}`;
+            balls = overs * 6 - (oversCounnt * 6 + currentOvers);
+            needEl.innerHTML = `${targetEl - score} Need Off ${balls} Balls`;
+            if(balls === 0){
+              runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)} RRR 0`;
+            }
+          }
         }
       }
+    } else {
+      return;
     }
-  } else {
-    return;
   }
-}
+}}
 
 function target() {
   let runRateShowEl = document.getElementById("runRateShow");
