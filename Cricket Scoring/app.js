@@ -1,11 +1,12 @@
-let selectionEl = document.getElementById("selection");
-let overs = 0;
 let oversCounnt = 0;
 let currentOvers = 0;
 let score = 0;
-let cheakBtnFlag = false;
-let out = 0;
-let target = 0;
+let selectionEl = document.getElementById("selection");
+let plus = 0;
+let targetEl = 0;
+let flag = true;
+let balls = "";
+let ball , over = 0;
 function generate() {
   let btns = `
   <button onClick="select('t20')">T20</button>
@@ -14,64 +15,70 @@ function generate() {
   selectionEl.innerHTML = btns;
 }
 function select(el) {
-  selectionEl.removeChild(selectionEl.childNodes[1]);
-  selectionEl.removeChild(selectionEl.childNodes[2]);
-  let btns = `
-   <button onClick="scoring()">Batting</button>
-  <button onClick="scoring()">Bolling</button>
-  `;
-  selectionEl.innerHTML = btns;
-  if (el === "odi") {
-    overs = 50;
-  } else {
-    overs = 20;
-  }
-}
-function scoring() {
-  selectionEl.removeChild(selectionEl.childNodes[1]);
-  selectionEl.removeChild(selectionEl.childNodes[2]);
   let items = `
  <input type="number" id="score" placeholder="Enter Current Score" />
-<input type="number" id="overs" placeholder="Enter Remaining Overs" />
+<select name="over" id="over"></select>
+<select name="over" id="ball"></select>
 <button onclick="cheak()">Cheak</button>
 <h3 id="scoreing"></h3>
 <h3 id="oversCount"></h3>`;
   selectionEl.innerHTML = items;
+
+  for (let i = 0; i <= 5; i++) {
+    document.getElementById(
+      "ball"
+    ).innerHTML += `<option value="${i}">${i}</option>`;
+  }
+  if (el === "odi") {
+    localStorage.setItem("overs", 50);
+    for (let i = 0; i < 50; i++) {
+      document.getElementById(
+        "over"
+      ).innerHTML += `<option value="${i}">${i}</option>`;
+    }
+  } else {
+    localStorage.setItem("overs", 20);
+    for (let i = 0; i < 20; i++) {
+      document.getElementById(
+        "over"
+      ).innerHTML += `<option value="${i}">${i}</option>`;
+    }
+  }
 }
 
 function cheak() {
-  let scoreingEl = document.getElementById("scoreing");
-  let oversCountEl = document.getElementById("oversCount");
+  let overs = localStorage.getItem("overs");
+  let scoreingPrint = document.getElementById("scoreing");
+  let oversCountPrint = document.getElementById("oversCount");
 
   score = Number(document.getElementById("score").value);
-  currentOvers = Number(document.getElementById("overs").value);
+  over = Number(document.getElementById("over").value);
+  ball = Number(document.getElementById("ball").value);
+currentOvers = Number(`${over}.${ball}`);
 
   if (score >= 0) {
-    scoreingEl.innerHTML = score;
-    cheakBtnFlag = true;
+    if (currentOvers >= 0 && currentOvers <= overs) {
+      // setTimeout(function(){
+      if(currentOvers >= 0){
+          oversCounnt = over;
+          currentOvers = ball;
+      }
+      finish();
+      // }, 2000)
+      scoreingPrint.innerHTML = "Redirecting.....";
+      scoreingPrint.style.color = "Green";
+    } else if (currentOvers >= overs) {
+      oversCountPrint.innerHTML = `Your overs is Greater Then ${overs}`;
+    } else {
+      oversCountPrint.innerHTML = "Your overs is Less Then 0";
+    }
   } else {
-    scoreingEl.innerHTML = "Your Score is Less Then 0";
-    cheakBtnFlag = false;
-  }
-  if (currentOvers >= 0 && currentOvers <= overs) {
-    oversCountEl.innerHTML = currentOvers;
-    cheakBtnFlag = true;
-  } else if (currentOvers >= overs) {
-    oversCountEl.innerHTML = `Your overs is Greater Then ${overs}`;
-    cheakBtnFlag = false;
-  } else {
-    oversCountEl.innerHTML = "Your overs is Less Then 0";
-    cheakBtnFlag = false;
-  }
-  if (cheakBtnFlag) {
-    let cheakBtn = selectionEl.childNodes[5];
-    cheakBtn.innerHTML = "Clear";
-    cheakBtn.setAttribute("onClick", "finish()");
+    scoreingPrint.innerHTML = "Your Score is Less Then 0";
   }
 }
 function finish() {
-  removing();
   let items = `
+  <button onclick="update(0)">Dot</button>
   <button onclick="update(1)">1</button>
 <button onclick="update(2)">2</button>
 <button onclick="update(3)">3</button>
@@ -83,24 +90,21 @@ function finish() {
 <button onclick="update('-1')">-1</button>
 <button onclick="update('-5')">-5</button>
 <h3 id="show"></h3>
+<h3 id="runRateShow"></h3>
+<h3 id="need"></h3>
 <input type="text" id="target">
-<button onclick="add()">Target</button>
-<h3 id="targetShow"></h3>
+<button onclick="target()">Target</button>
   `;
   selectionEl.innerHTML = items;
 }
-function removing() {
-  do {
-    selectionEl.removeChild(selectionEl.childNodes[0]);
-    if (selectionEl.childNodes.length === 0) {
-      break;
-    }
-  } while (selectionEl.childNodes[0] !== "");
-}
 
 function update(num) {
+  let overs = localStorage.getItem("overs");
+  let out = 0;
   let result = document.getElementById("show");
-  let targetShowEl = document.getElementById("targetShow");
+  let runRateShowEl = document.getElementById("runRateShow");
+  let needEl = document.getElementById("need");
+
   if (out < 10) {
     if (num == -1) {
       score--;
@@ -118,25 +122,50 @@ function update(num) {
       out++;
       result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
     } else {
-      if (currentOvers < 6) {
+      if (currentOvers < 5) {
         currentOvers++;
         score += num;
       } else {
-        if (num !== "wide") {
-          oversCounnt++;
-          currentOvers = 1;
-          score += num;
-        }
+        oversCounnt++;
+        currentOvers = 0;
+        score += num;
       }
       result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
-      targetShowEl.innerHTML = `${target - score} need of ${
-        overs * 6 - (oversCounnt * 6 + currentOvers - 1)
-      } Balls`;
+      plus = Number(`${oversCounnt}.${currentOvers}`);
+      if (plus <= overs) {
+        if (flag) {
+          runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)}`;
+        } else {
+          runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)} RRR ${(
+            (targetEl - score) /
+            (overs - plus)
+          ).toFixed(2)}`;
+          balls = overs * 6 - (oversCounnt * 6 + currentOvers);
+          needEl.innerHTML = `${targetEl - score} Need Off ${balls} Balls`;
+        }
+      }
     }
   } else {
     return;
   }
 }
-function add() {
-  target = document.getElementById("target").value;
+
+function target() {
+  let runRateShowEl = document.getElementById("runRateShow");
+  let overs = localStorage.getItem("overs");
+  targetEl = document.getElementById("target").value;
+  if (plus <= overs) {
+    if (score === 0 || oversCounnt === 0 || currentOvers === 0) {
+      runRateShowEl.innerHTML = `CRR 0.00 RRR ${(
+        (targetEl - score) /
+        (overs - plus)
+      ).toFixed(2)}`;
+    } else {
+      runRateShowEl.innerHTML = `CRR ${(score / plus).toFixed(2)} RRR ${(
+        (targetEl - score) /
+        (overs - plus)
+      ).toFixed(2)}`;
+    }
+    flag = false;
+  }
 }
