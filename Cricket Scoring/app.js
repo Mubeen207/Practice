@@ -109,10 +109,8 @@ function update(num) {
   let runRateShowEl = document.getElementById("runRateShow");
   let needEl = document.getElementById("need");
 let condition = Number(`${oversCounnt}.${currentOvers+1}`);
-    if(condition > overs || score > targetEl){
-return;
-    } else {
 
+  if(breaking(condition)){
     
 
   {
@@ -131,6 +129,7 @@ return;
         result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
       } else if (num == "out") {
         out++;
+        currentOvers++;
         result.innerHTML = `${score} - ${out} (${oversCounnt} - ${currentOvers})`;
       } else {
         if (currentOvers < 5) {
@@ -165,6 +164,22 @@ return;
   }
 }}
 
+
+function breaking(condition){
+          if(!flag){
+            if(score >= targetEl || condition > localStorage.getItem("overs")*6){
+              return false;
+            }
+          } else {
+            if(condition >= localStorage.getItem("overs")*6){
+              return false;
+             
+            }
+            console.log(condition);
+            
+            return true;
+          }
+}
 function target() {
   let runRateShowEl = document.getElementById("runRateShow");
   let overs = localStorage.getItem("overs");
@@ -181,6 +196,6 @@ function target() {
         (overs - plus)
       ).toFixed(2)}`;
     }
-    flag = false;
   }
+  flag = false;
 }
