@@ -1,8 +1,5 @@
 import { useState } from "react";
-
 const Display = () => {
-  const [input, setInput] = useState("");
-
   const buttons = [
     7,
     8,
@@ -23,10 +20,12 @@ const Display = () => {
     "C",
     "AC",
   ];
-  const operators = ["+", "-", "÷", "*", "."];
+  const [input, setInput] = useState("");
+  const operators = ["+", "-", "÷", "*"];
   const [lastOp, setLastOp] = useState(false);
   const [flag, setFlag] = useState(true);
   const [chkEqal, setChkEqal] = useState(false);
+  const [isDecimal, setIsDecimal] = useState(false);
   {
     //   const handleClick = (btn) => {
     //     if (btn === "=") {
@@ -45,27 +44,37 @@ const Display = () => {
     //     }
     //   };
   }
+  function ac() {
+    setInput("");
+    setFlag(true);
+    setLastOp(false);
+    setChkEqal(false);
+    setIsDecimal(false);
+  }
   const handleClick = (btn) => {
+    if (btn === "=" && input === "") return;
+    if (btn === "=" && operators.includes(input.at(-1))) return;
     if (btn === "C" || btn === "AC") {
       if (btn === "AC") {
-        setInput("");
+        ac();
       } else {
-        try {
-          if (input === "Error") {
-            setInput("");
-            // yahan error a raha hai
-            console.log("Hello");
-            
-          }
-          setInput(input.slice(0, -1));
-        } catch {
-          setInput("Error");
+        if (input === "Error") {
+          ac();
+        } else {
+          const newValue = input.slice(0, -1);
+          setInput(newValue);
+          setLastOp(false);
+          setIsDecimal(newValue.includes("."));
         }
       }
     } else if (btn === "=") {
       if (!flag) return;
       try {
-        setInput(eval(input));
+        const expression = input.replace(/÷/g, "/");
+        const result = String(eval(expression));
+        setInput(result);
+        setIsDecimal(result.includes("."));
+
         setFlag(false);
         setChkEqal(true);
       } catch {
@@ -74,38 +83,73 @@ const Display = () => {
         setChkEqal(true);
       }
     } else if (operators.includes(btn)) {
+      if (input === "") return;
       if (lastOp) return;
       setInput((prev) => prev + btn);
       setLastOp(true);
+      setChkEqal(false);
+      setIsDecimal(false);
     } else {
+      if (btn === ".") {
+        if (isDecimal) return;
+        setIsDecimal(true);
+      }
       if (chkEqal) {
-        setInput("");
+        ac();
         setChkEqal(false);
         setFlag(true);
       }
-      setInput((prev) => prev + btn);
-      setLastOp(false);
+      if (input === "" && btn === ".") {
+        setInput((prev) => prev + "0" + btn);
+        setLastOp(false);
+        setFlag(true);
+      } else {
+        setInput((prev) => prev + btn);
+        setLastOp(false);
+        setFlag(true);
+      }
     }
   };
 
   return (
-    <div className="border p-4 flex flex-col max-w-md mx-auto">
-      <input
-        type="text"
-        className="border p-2 mb-4 text-right text-2xl"
-        value={input}
-        readOnly
-      />
-      <div className="grid grid-cols-4 gap-2">
-        {buttons.map((btn, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleClick(btn)}
-            className="bg-gray-200 hover:bg-gray-300 rounded py-4 text-xl font-semibold"
-          >
-            {btn}
-          </button>
-        ))}
+    <div className="max-w-md mx-auto p-6 bg-[#F3F4F6] rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] border border-white">
+      <div className="mb-8 p-6 bg-white rounded-[2rem] shadow-[inset_0_4px_12px_rgba(0,0,0,0.03)] border border-gray-100">
+        <input
+          type="text"
+          className="w-full bg-transparent text-gray-800 text-5xl font-light text-right focus:outline-none 
+                 overflow-x-auto whitespace-nowrap scrollbar-hide"
+          value={input}
+          readOnly
+          ref={(el) => {
+            if (el) el.scrollLeft = el.scrollWidth;
+          }}
+        />
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {buttons.map((btn, idx) => {
+          const isOperator = ["+", "-", "*", "/", "="].includes(btn);
+          const isClear = btn === "AC" || btn === "C";
+
+          return (
+            <button
+              key={idx}
+              onClick={() => handleClick(btn)}
+              className={`
+            h-20 rounded-[1.5rem] text-2xl font-medium transition-all duration-200 active:scale-95
+            ${isClear ? "col-span-2" : "col-span-1"} 
+            ${
+              isOperator
+                ? "bg-orange-500 text-white shadow-[0_8px_16px_rgba(249,115,22,0.3)] hover:bg-orange-600"
+                : isClear
+                ? "bg-gray-800 text-white shadow-lg hover:bg-black" 
+                : "bg-white text-gray-800 shadow-[0_4px_10px_rgba(0,0,0,0.08)] border border-gray-50 hover:bg-gray-50"
+            }
+          `}
+            >
+              {btn}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
