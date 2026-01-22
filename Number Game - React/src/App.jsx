@@ -43,8 +43,6 @@ function App() {
       }
       setIsThirdIndex(temp);
       temp = [];
-      console.log(count);
-
       if (count === 3) setHandleShowNumber(true);
     }
   }, [arr]);
