@@ -68,15 +68,15 @@ function App() {
   return (
     <>
       <div>
-        <div className="flex flex-wrap justify-center gap-6 p-6">
+        <div className="flex gap-6 p-6 w-full text-[20px]">
           <div
             onClick={() => arrManage(1)}
-            className="cursor-pointer flex flex-wrap  justify-center items-center gap-2 p-4 rounded-md bg-green-600 hover:bg-green-700 transition max-w-xs w-full sm:w-auto"
+            className="cursor-pointer flex flex-wrap justify-center items-center gap-2 p-6 rounded-md bg-green-600 hover:bg-green-700 transition flex-1 min-h-30"
           >
             {isFirstIndex.map((num, idx) => (
               <p
                 key={idx}
-                className="w-8 h-8 flex justify-center items-center bg-white rounded shadow text-green-800 font-semibold text-sm"
+                className="w-14 h-14 flex justify-center items-center bg-white rounded shadow text-green-800 font-semibold"
               >
                 {num}
               </p>
@@ -85,12 +85,12 @@ function App() {
 
           <div
             onClick={() => arrManage(2)}
-            className="cursor-pointer flex flex-wrap  justify-center items-center gap-2 p-4 rounded-md bg-red-500 hover:bg-red-600 transition max-w-xs w-full sm:w-auto"
+            className="cursor-pointer flex flex-wrap justify-center items-center gap-2 p-6 rounded-md bg-red-500 hover:bg-red-600 transition flex-1 min-h-30"
           >
             {isSecondIndex.map((num, idx) => (
               <p
                 key={idx}
-                className="w-8 h-8 flex justify-center items-center bg-white rounded shadow text-red-800 font-semibold text-sm"
+                className="w-14 h-14 flex justify-center items-center bg-white rounded shadow text-red-800 font-semibold"
               >
                 {num}
               </p>
@@ -99,12 +99,12 @@ function App() {
 
           <div
             onClick={() => arrManage(3)}
-            className="cursor-pointer flex flex-wrap justify-center items-center gap-2 p-4 rounded-md bg-blue-600 hover:bg-blue-700 transition max-w-xs w-full sm:w-auto"
+            className="cursor-pointer flex flex-wrap justify-center items-center gap-2 p-6 rounded-md bg-blue-600 hover:bg-blue-700 transition flex-1 min-h-30"
           >
             {isThirdIndex.map((num, idx) => (
               <p
                 key={idx}
-                className="w-8 h-8 flex justify-center items-center bg-white rounded shadow text-blue-900 font-semibold text-sm"
+                className="w-14 h-14 flex justify-center items-center bg-white rounded shadow text-blue-900 font-semibold"
               >
                 {num}
               </p>

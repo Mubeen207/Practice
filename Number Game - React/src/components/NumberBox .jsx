@@ -24,7 +24,7 @@ const NumberBox = ({ number, onPlayAgain }) => {
         <p className="text-5xl font-bold text-green-600 mb-6">{number}</p>
         <button
           onClick={onPlayAgain}
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
         >
           Play Again
         </button>
