@@ -7,11 +7,11 @@ const Header = () => {
         <h1 className="font-bold text-2xl">Mubeen</h1>
         <ul className="flex gap-6 ">
           <List btnName="Home" route="/" />
-          <List btnName="About Us" route="/about" />
-          <List btnName="About Us" route="/about" />
-          <List btnName="About Us" route="/about" />
-          <List btnName="About Us" route="/about" />
-          <List btnName="About Us" route="/about" />
+          <List btnName="Offices" route="/offices" />
+          <List btnName="Contact" route="/contact" />
+          <List btnName="Services" route="/services" />
+          <List btnName="Blog" route="/blog" />
+          <List btnName="Gallery" route="/gallery" />
         </ul>
         <div className="flex gap-3">
           <button>Sign in</button>
