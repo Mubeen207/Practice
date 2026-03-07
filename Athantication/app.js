@@ -1,6 +1,6 @@
 const firebaseConfig = {
-  apiKey: // Enter Your Api of FireBase
-  authDomain: // Enter your Domain
+  apiKey: "AIzaSyD6FCyNQex9bpOHTj_eeb5lzuAiR8I6MWw",
+  authDomain: "authentication-1548a.firebaseapp.com",
   projectId: "authentication-1548a",
   storageBucket: "authentication-1548a.firebasestorage.app",
   messagingSenderId: "83155548017",
