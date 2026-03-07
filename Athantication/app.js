@@ -1,5 +1,5 @@
 const firebaseConfig = {
-  apiKey: // this is api
+  apiKey: // Enter YOur Api
   authDomain: "authentication-1548a.firebaseapp.com",
   projectId: "authentication-1548a",
   storageBucket: "authentication-1548a.firebasestorage.app",
