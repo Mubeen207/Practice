@@ -36,3 +36,20 @@ export function deleteProduct(id) {
 
   return filteredData;
 }
+
+export function editProduct(id, title, description, price) {
+  const data = getAll();
+  const Index = data.findIndex((p) => p.id === Number(id));
+  if (Index === -1) return null;
+
+  data[Index] = {
+    ...data[Index],
+    title,
+    description,
+    price,
+  };
+
+  fs.writeFileSync(filePath, JSON.stringify(data));
+
+  return data[Index];
+}

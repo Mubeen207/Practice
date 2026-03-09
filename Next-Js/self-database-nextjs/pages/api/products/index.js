@@ -1,4 +1,4 @@
-import { deleteProduct, getAll, save } from "@/services/service";
+import { deleteProduct, editProduct, getAll, save } from "@/services/service";
 
 export default function handler(req, res) {
   if (req.method === "GET") {
@@ -12,6 +12,10 @@ export default function handler(req, res) {
     const { productId } = req.query;
     const data = deleteProduct(productId);
     res.status(201).json(data).send();
+  } else if (req.method === "PUT") {
+    const { id, title, description, price } = req.body;
+    const updates = editProduct(id, title, description, price);
+    res.status(200).json(updates);
   }
   return res.status(404).json({ message: "This method is not allowed" }).send();
 }
