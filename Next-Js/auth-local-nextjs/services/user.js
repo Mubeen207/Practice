@@ -21,10 +21,22 @@ export function save(name, email, password) {
     throw new Error("user Already Exits");
   }
   data.push({
-    id: data.length + 1,
+    id: IdGenerator(),
     name,
     email,
     password,
   });
   fs.writeFileSync(filePath, JSON.stringify(data));
+}
+export function IdGenerator() {
+  let id = "";
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    id += chars[randomIndex];
+  }
+
+  return id;
 }

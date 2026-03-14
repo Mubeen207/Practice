@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 
-export default function Form() {
-  const [signIn, setSignIn] = useState(false);
+export default function Form({ users }) {
+  const [signIn, setSignIn] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleAuth = async (e) => {
     e.preventDefault();
-    
+
     if (signIn) {
+      if (email === "" || password === "") return;
+      const foundEmail = users.find((user) => user.email === email);
+      if (!foundEmail || foundEmail.password !== password)
+        return alert("Incorrect Id Or Password");
+      alert("Welcome");
     } else {
       if (name === "" && email === "" && password === "") return;
       const response = await fetch("/api/auth/signup", {
