@@ -4,7 +4,7 @@ let firstOperand = null;
 let resetNext = false;
 let memory = 0;
 let history = [];
-// update function
+// update function hai
 function updateDisplay(value) {
   document.getElementById("display").value = value;
 }
