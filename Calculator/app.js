@@ -8,7 +8,7 @@ let history = [];
 function updateDisplay(value) {
   document.getElementById("display").value = value;
 }
-
+// append number function
 function appendNumber(num) {
   if (resetNext) {
     current = "";
