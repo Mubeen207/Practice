@@ -18,7 +18,7 @@ function appendNumber(num) {
   current += num;
   updateDisplay(current);
 }
-
+// set oppration 
 function setOperation(op) {
   if (current === "") return;
 
