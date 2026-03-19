@@ -32,7 +32,7 @@ function setOperation(op) {
   operator = op;
   current = "";
 }
-
+// calculate result function
 function calculateResult() {
   if (!operator || current === "") return;
 
