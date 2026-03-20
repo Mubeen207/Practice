@@ -45,7 +45,7 @@ function calculateResult() {
   current = "";
   resetNext = true;
 }
-// clear display functionm
+// clear display function
 function clearDisplay() {
   current = "";
   operator = "";
