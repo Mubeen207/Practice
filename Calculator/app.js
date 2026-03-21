@@ -52,7 +52,7 @@ function clearDisplay() {
   firstOperand = null;
   updateDisplay("");
 }
-
+// backspace function
 function backspace() {
   current = current.slice(0, -1);
   updateDisplay(current);
