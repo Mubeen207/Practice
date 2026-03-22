@@ -57,7 +57,7 @@ function backspace() {
   current = current.slice(0, -1);
   updateDisplay(current);
 }
-
+// oprate function
 function operate(a, b, op) {
   switch (op) {
     case "+": return a + b;
