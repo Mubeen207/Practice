@@ -5,7 +5,7 @@
   const itemsDiv = document.getElementById("items");
   const generateBtn = document.getElementById("generateBtn");
   const clearBtn = document.getElementById("clearBtn");
-
+// items arry aye ga yaha
   let items = [];
 
   function renderItems() {
