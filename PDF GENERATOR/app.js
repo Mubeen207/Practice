@@ -31,7 +31,7 @@
       });
     });
   }
-
+// jab add button pr click hoga to event lisner call hoga 
   addBtn.addEventListener("click", () => {
     const name = document.getElementById("field1").value.trim();
     const city = document.getElementById("field2").value.trim();
