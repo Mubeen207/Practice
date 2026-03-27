@@ -11,5 +11,6 @@ let condition = birthmonth.indexOf(input);
 if (condition > -1) {
   console.log("You are eligible"); // jan - may are allow hai
 } else {
+// you are not eligible
   console.log("You are not eligible");
 }
