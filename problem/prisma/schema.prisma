@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  image       String?
+  role        Role         @default(STUDENT)
+  bio         String?
+  createdAt   DateTime     @default(now())
+  courses     Course[]
+  enrollments Enrollment[]
+  progress    Progress[]
+}
+
+model Course {
+  id           String       @id @default(cuid())
+  title        String
+  description  String
+  thumbnail    String?
+  price        Float        @default(0)
+  category     String
+  level        Level        @default(BEGINNER)
+  isPublished  Boolean      @default(false)
+  instructorId String
+  rating       Float        @default(0)
+  createdAt    DateTime     @default(now())
+  chapters     Chapter[]
+  instructor   User         @relation(fields: [instructorId], references: [id])
+  enrollments  Enrollment[]
+}
+
+model Chapter {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  videoUrl    String?
+  content     String?
+  position    Int
+  isFree      Boolean    @default(false)
+  isPublished Boolean    @default(false)
+  courseId    String
+  course      Course     @relation(fields: [courseId], references: [id])
+  progress    Progress[]
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  createdAt DateTime @default(now())
+  course    Course   @relation(fields: [courseId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, courseId])
+}
+
+model Progress {
+  id          String  @id @default(cuid())
+  userId      String
+  chapterId   String
+  isCompleted Boolean @default(false)
+  chapter     Chapter @relation(fields: [chapterId], references: [id])
+  user        User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, chapterId])
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}

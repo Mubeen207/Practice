@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+.nav-link {
+  @apply text-gray-600 hover:text-blue-600 font-medium transition-colors;
+}
