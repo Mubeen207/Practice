@@ -11,7 +11,7 @@ export default function Login() {
   const { status } = useSession();
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/");
+      router.replace("/");
     }
   }, [status, router]);
 
@@ -24,17 +24,18 @@ export default function Login() {
     });
     console.log(data);
 
-    if (data?.error) {
-      alert("Invalid email or password");
-    } else {
+    if (data?.ok) {
       alert("Welcome");
       setEmail("");
       setPassword("");
-      router.push("/");
+      router.replace("/");
+    } else {
+      alert("Invalid email or password");
     }
   };
   return (
     <>
+    <title>Login</title>
       <div>Login</div>
       <form onSubmit={handleLogin}>
         <input

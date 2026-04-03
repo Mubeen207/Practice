@@ -1,22 +1,16 @@
-// "use client";
 import { getServerSession } from "next-auth";
-import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import LogoutButton from "./components/LogoutButton";
-// import { useEffect } from "react";
-
-export default function Component() {
-  const { data: session } = getServerSession();
-  // useEffect(() => {
+export default async function Component() {
+  const session = await getServerSession();
   if (!session) {
     redirect("/login");
   }
-  // }, [session]);
-
   if (!session) return <p>loading...</p>;
   return (
     <>
-      <p>Welcome to deshboard</p>
+    <title>{session.user.name}</title>
+      <p>Welcome {session.user.name}</p>
       <LogoutButton />
     </>
   );
