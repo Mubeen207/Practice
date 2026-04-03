@@ -20,9 +20,12 @@ export default function Login() {
       },
     });
     const { message } = await res.json();
-    console.log(message);
-
     alert(message);
+    if(message === "User Created"){
+      setName("");
+      setEmail("");
+      setPassword("");
+    }
   };
   return (
     <>
