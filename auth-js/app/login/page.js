@@ -22,8 +22,6 @@ export default function Login() {
       password,
       redirect: false,
     });
-    console.log(data);
-
     if (data?.ok) {
       alert("Welcome");
       setEmail("");
