@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt, { compare } from "bcrypt";
 import fs from "fs";
 import path from "path";
 
@@ -13,17 +13,20 @@ export function getByEmail(email) {
   const data = getUsers();
   return data.find((user) => user.email === email);
 }
-
+export async function verifyPassword(hashedPassword, password) {
+  const isValid = await compare(password , hashedPassword);
+  return isValid;
+}
 export async function save(name, email, password) {
   const data = getUsers();
   const found = getByEmail(email);
- if (found) {
-  return { message: "User already exists" };
-}
+  if (found) {
+    return { message: "User already exists" };
+  }
   const hashedPassword = await bcrypt.hash(password, 12);
   data.push({ name, email, password: hashedPassword, id: generateID(8) });
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-  return {message : "User Created"};
+  return { message: "User Created" };
 }
 
 function generateID(length = 8) {

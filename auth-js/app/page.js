@@ -1,20 +1,22 @@
-"use client";
-import { useSession, signIn, signOut } from "next-auth/react";
+// "use client";
+import { getServerSession } from "next-auth";
+import { signOut } from "next-auth/react";
+import { redirect } from "next/navigation";
+// import { useEffect } from "react";
 
 export default function Component() {
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
+  const { data: session} = getServerSession();
+  // useEffect(() => {
+    if (!session) {
+      redirect("/login");
+    }
+  // }, [session]);
+
+  if (!session) return <p>loading...</p>;
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => signIn("github")}>Sign in as github</button>
+      <p>Welcome to deshboard</p>
+     
     </>
   );
 }
