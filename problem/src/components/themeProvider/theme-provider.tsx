@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-// func
+// functio
 export function ThemeProvider({
   children,
   ...props
