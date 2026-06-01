@@ -1,4 +1,4 @@
-//polik
+//poli
 
 "use client";
 import React, { useState } from "react";
