@@ -1,4 +1,4 @@
-//sidra
+//sidr
 
 "use client";
 import React, { useState } from "react";
